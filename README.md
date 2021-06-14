@@ -1,5 +1,5 @@
 ## Special statement:
-* This warehouse is only used for backup, please do not use any scripts of this warehouse
+* This warehouse is only used for backup, please do not use any scripts of this warehouse, and do not download any files of this warehouse
 
 * Any unlocking and decryption analysis scripts involved in the Script project released by this warehouse are only used for testing, learning and research, and are forbidden to be used for commercial purposes. Their legality, accuracy, completeness and effectiveness cannot be guaranteed. Please make your own judgment based on the situation. .
 
