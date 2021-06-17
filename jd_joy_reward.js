@@ -5,6 +5,7 @@ Last Modified time: 2021-06-06 21:22:37
 兑换规则：一个账号一天只能兑换一次京豆。
 兑换奖品成功后才会有系统弹窗通知
 每日京豆库存会在0:00、8:00、16:00更新。
+cron 59 59 7-23/8 * * * jd_joy_reward.js
 脚本兼容: Quantumult X, Surge, Loon, JSBox, Node.js
 ==============Quantumult X==============
 [task_local]
