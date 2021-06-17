@@ -13,7 +13,7 @@ Last Modified time: 2021-06-06 21:22:37
 
 ==============Loon==============
 [Script]
-cron "0 0-16/8 * * *" script-path=jd_joy_reward.js,tag=宠汪汪积分兑换奖品
+cron "59 59 7-23/8 * * *" script-path=jd_joy_reward.js,tag=宠汪汪积分兑换奖品
 
 ================Surge===============
 宠汪汪积分兑换奖品 = type=cron,cronexp="0 0-16/8 * * *",wake-system=1,timeout=3600,script-path=jd_joy_reward.js
