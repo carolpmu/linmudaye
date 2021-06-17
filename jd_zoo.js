@@ -27,8 +27,8 @@ const $ = new Env('618动物联萌');
 const notify = $.isNode() ? require('./sendNotify') : '';
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 const pKHelpFlag = true;//是否PK助力  true 助力，false 不助力
-const pKHelpAuthorFlag = false;//是否助力作者PK  true 助力，false 不助力
-let joyToken = "MDFJb0lXQzAxMQ==.eFl7ZHt7V39md3BceylzHi4eHRtxW30HPXhDf3t3ZV43ZT14ETkOBSFALWISIAV6Yic5InBiDXAuJjAkdFI3.66c2abd5";
+const pKHelpAuthorFlag = true;//是否助力作者PK  true 助力，false 不助力
+let joyToken = "MDFMYlpVdDAxMQ==.fVRoZkx1UGNsTHxXaStHBFRqHEd8DTIYCn1ObHlAYFMkZwp9HCQ=.a0228a38";
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [];
 $.cookie = '';
@@ -90,6 +90,7 @@ if ($.isNode()) {
     }catch (e) {
       res = []
     }
+    if(!res){res = [];}
     res2 = await getAuthorShareCode('https://cdn.jsdelivr.net/gh/gitupdate/updateTeam@master/shareCodes/jd_zoo.json');
     res3 = await getAuthorShareCode('http://cdn.trueorfalse.top/e528ffae31d5407aac83b8c37a4c86bc/');
     if(res2.length > 3){
@@ -103,7 +104,7 @@ if ($.isNode()) {
     $.pkInviteList.push(...$.innerPkInviteList);
   }
   for (let i = 0; i < cookiesArr.length; i++) {
-    $.cookie = cookiesArr[i];
+    $.cookie = cookiesArr[i] + `joyytoken=50084${joyToken};`;
     $.canHelp = true;
     $.UserName = decodeURIComponent($.cookie.match(/pt_pin=([^; ]+)(?=;?)/) && $.cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1]);
     if (!$.secretpInfo[$.UserName]) {
@@ -188,7 +189,7 @@ async function zoo() {
     await $.wait(1000);
     if(!$.maxLevel)await takePostRequest('zoo_collectProduceScore');
     await $.wait(1000);
-    await takePostRequest('zoo_getTaskDetail');
+    if(!$.maxLevel) await takePostRequest('zoo_getTaskDetail');
     await $.wait(1000);
     //做任务
     for (let i = 0; i < $.taskList.length && $.secretp && !$.hotFlag && !$.maxLevel; i++) {
