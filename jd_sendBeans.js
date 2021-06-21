@@ -1,6 +1,6 @@
 /*
 送豆得豆
-cron 15 2,14,22 * * * sendBeans.js
+cron 15 2,14,22 * * * jd_sendBeans.js
 更新时间：2021-6-19 23点
 
 活动入口：京东APP-京豆-送豆得豆
