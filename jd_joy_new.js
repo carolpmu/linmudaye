@@ -7,7 +7,7 @@
  完成度 1%，要用的手动执行，先不加cron了
  默认80，10、20、40、80可选
  export feedNum = 80
- cron 15 0-23/2 * * * jd_joy_new.js
+ */
 
 const $ = new Env("宠汪汪二代目")
 console.log('\n====================Hello World====================\n')
