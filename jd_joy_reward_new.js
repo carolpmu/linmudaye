@@ -3,7 +3,7 @@
  更新时间：2021-06-22
  活动入口：京东APP我的-宠汪汪
  完成度 1.01%
-cron 59 59 7-23/8 * * * jd_joy_reward_new.js
+ cron 59 59 7-23/8 * * * jd_joy_reward_new.js
 
  默认500
  export JD_JOY_REWARD_NAME = 500
