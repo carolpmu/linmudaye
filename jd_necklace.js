@@ -1,3 +1,7 @@
+/*
+点点券
+corn 10 0,20 * * * jd_necklace.js
+*/
 const $ = new Env('点点券二代目');
 const https = require('https');
 const fs = require('fs/promises');
