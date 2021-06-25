@@ -6,9 +6,9 @@
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 
 自行添加变量设置邀请码 格式如下 默认10个
-export cashinviteCode="eU9YarjmN_l0-GaDzHIVgA"
-export cashinviteCode2="eU9YEIzvIL9XlTmXuAhW"
-export cashinviteCode3="eU9YEIzvIL9XlTmXuAhW"
+export cashinviteCode="eU9YaL7kM_kg-GzdnnUb3w"
+export cashinviteCode2="eU9Yau3mNP5w9jyDynAV3w"
+export cashinviteCode3="eU9YN4vrAa9YihCqqy10"
 ============Quantumultx===============
 [task_local]
 #签到领现金
@@ -35,7 +35,7 @@ let helpAuthor = true;
 const randomCount = $.isNode() ? 20 : 5;
 let cashinviteCode = 'eU9YaL7kM_kg-GzdnnUb3w';
 let cashinviteCode2 = 'eU9Yau3mNP5w9jyDynAV3w';
-let cashinviteCode3 = '9bWQulkXsnSg';
+let cashinviteCode3 = 'eU9YN4vrAa9YihCqqy10';
 let cashinviteCode4 = '';
 let cashinviteCode5 = '';
 let cashinviteCode6 = '';
