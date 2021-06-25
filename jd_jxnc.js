@@ -187,7 +187,7 @@ function requireConfig() {
 
     try {
       let options = {
-        "url": ``,
+        "url": `https://cdn.jsdelivr.net/gh/linmudaye/updateTeam@master/shareCodes/jxnc.txt`,
         "headers": {
           "Accept": "application/json,text/plain, */*",
           "Content-Type": "application/x-www-form-urlencoded",
