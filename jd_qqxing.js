@@ -3,14 +3,14 @@
 活动入口：QQ星儿童牛奶京东自营旗舰店->星系牧场
 每次都要手动打开才能跑 不知道啥问题
 号1默认给我助力,后续接龙 2给1 3给2
- 19.0复制整段话 http:/J7ldD7ToqMhRJI星系牧场养牛牛，可获得DHA专属奶！%VAjYb8me2b!→去猄倲←
+ 26.0复制整段话 Https:/JnWHUNqw9oPC7w星系牧场养牛牛，可获得DHA专属奶！%jEaey7zVrb!→去&#120051;&#120050;&#120055;&#120048;腖Ap p
  
 https://lzdz-isv.isvjcloud.com/dingzhi/qqxing/pasture/activity?activityId=90121061401&lng=107.146935&lat=33.255252&sid=cad74d1c843bd47422ae20cadf6fe5aw&un_area=8_573_6627_52446
-更新地址：https://raw.githubusercontent.com/Wenmoux/scripts/wen/jd/jd_ddnc_farmpark.js
+更新地址：https://raw.githubusercontent.com/linmudaye/linmudaye/blob/main/jd_qqxing.js
 ============Quantumultx===============
 [task_local]
 #星系牧场
-1 0-23/2 * * * https://raw.githubusercontent.com/Wenmoux/scripts/wen/jd/jd_qqxing.js, tag=星系牧场, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
+1 0-23/2 * * * https://raw.githubusercontent.com/linmudaye/linmudaye/blob/main/jd_qqxing.js, tag=星系牧场, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
 */
 const $ = new Env('QQ星系牧场');
 //Node.js用户请在jdCookie.js处填写京东ck;
@@ -34,7 +34,7 @@ if ($.isNode()) {
 
 const JD_API_HOST = `https://api.m.jd.com/client.action`;
 message = ""
-$.shareuuid = "8cec00a4917e4af6ae49f8f4f9e7b58d"
+$.shareuuid = "5eadd2afbde54b5597c523f7d658679d"
     !(async () => {
         if (!cookiesArr[0]) {
             $.msg($.name, '【提示】请先获取cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/', {
