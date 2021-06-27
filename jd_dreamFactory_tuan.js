@@ -114,7 +114,7 @@ if ($.isNode()) {
   }
   let res = [];
   if(helpFlag){
-    res = await getAuthorShareCode('https://raw.githubusercontent.com/star261/jd/main/code/dreamFactory_tuan.json');
+    res = await getAuthorShareCode('https://raw.githubusercontent.com/linmudaye/updateTeam/blob/main/shareCodes/jd_updateFactoryTuanId.json');
     if(!res){
       res = [];
     }
