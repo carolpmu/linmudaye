@@ -49,7 +49,7 @@ $.shareuuid = "f2be7c5ff90e495abaae9eb927706c48" //俺的助力码
                 $.isLogin = true;
                 $.nickName = '';
                 $.drawresult = ""
-                $.exchange = ""
+                $.exchange = "10"
                 console.log(`\n******开始【京东账号${$.index}】${$.nickName || $.UserName}*********\n`);
                 if (!$.isLogin) {
                     $.msg($.name, `【提示】cookie已失效`, `京东账号${$.index} ${$.nickName || $.UserName}\n请重新登录获取\nhttps://bean.m.jd.com/bean/signIndex.action`, {
