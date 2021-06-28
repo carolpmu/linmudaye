@@ -17,7 +17,7 @@ cron "10 0,3,8,11,17 * * *" script-path=https://raw.githubusercontent.com/linmud
 */
 let isNotify = true;//是否通知,仅限nodejs
 let ckPath = './jdCookie.js';//ck路径,环境变量:JDDJ_CKPATH
-const $ = new API("jd_jddj_fruit");
+const $ = new API("京东到家果园任务");
 let thiscookie = '', deviceid = '', sid = '', nickname = '';
 let lat = '30.' + Math.round(Math.random() * (99999 - 10000) + 10000);
 let lng = '114.' + Math.round(Math.random() * (99999 - 10000) + 10000);
