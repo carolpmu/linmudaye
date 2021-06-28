@@ -1,14 +1,19 @@
 /*
-v5.6
-京东到家果园任务脚本,支持qx,loon,shadowrocket,surge,nodejs
-兼容京东jdCookie.js
+京东到家果园任务
+cron 10 0,3,8,11,17 * * * jd_jddj_fruit.js
+已支持IOS双京东账号,Node.js支持N个京东账号
+脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
+============Quantumultx===============
 [task_local]
 #京东到家果园任务
-10 0,3,8,11,17 * * * jd_jddj_fruit.js, tag=京东到家果园任务
-
+10 0,3,8,11,17 * * * https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_jddj_fruit.js, tag=京东到家果园任务
+================Loon==============
 [Script]
-cron "10 0,3,8,11,17 * * *" script-path=jd_jddj_fruit.js,tag=京东到家果园任务
-
+cron "10 0,3,8,11,17 * * *" script-path=https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_jddj_fruit.js,tag=京东到家果园任务
+===============Surge=================
+京东到家果园任务 = type=cron,cronexp="10 0,3,8,11,17 * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_jddj_fruit.js
+============小火箭=========
+京东到家果园任务 = type=cron,script-path=https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_jddj_fruit.js, cronexpr="10 0,3,8,11,17 * * *", timeout=3600, enable=true
 */
 let isNotify = true;//是否通知,仅限nodejs
 let ckPath = './jdCookie.js';//ck路径,环境变量:JDDJ_CKPATH
