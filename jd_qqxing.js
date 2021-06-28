@@ -55,7 +55,7 @@ $.shareuuid = "5eadd2afbde54b5597c523f7d658679d"
                 $.foodNum = 0
                 $.nickName = '';
                 $.drawresult = ""
-                $.exchange =0
+                $.exchange =20
                 console.log(`\n******开始【京东账号${$.index}】${$.nickName || $.UserName}*********\n`);
                 if (!$.isLogin) {
                     $.msg($.name, `【提示】cookie已失效`, `京东账号${$.index} ${$.nickName || $.UserName}\n请重新登录获取\nhttps://bean.m.jd.com/bean/signIndex.action`, {
