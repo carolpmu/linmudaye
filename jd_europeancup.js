@@ -10,7 +10,7 @@ cron 55 59 9  * * * jd_europeancup.js
 const $ = new Env('狂欢欧洲杯');
 //Node.js用户请在jdCookie.js处填写京东ck;
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
-cupExid = $.isNode() ? (process.env.Cupexid ? process.env.Cupexid : 38) : ($.getdata("Cupexid") ? $.getdata("Cupexid") : 38);
+cupExid = $.isNode() ? (process.env.Cupexid ? process.env.Cupexid : 39) : ($.getdata("Cupexid") ? $.getdata("Cupexid") : 39);
 
 const randomCount = $.isNode() ? 20 : 5;
 const notify = $.isNode() ? require('./sendNotify') : '';
