@@ -1,6 +1,6 @@
 /*
 更新地址：https://raw.githubusercontent.com/linmudaye/linmudaye/blob/main/jd_europeancup.js
-============Quantumultx===============
+cron 55 59 9  * * * jd_europeancup.js
 [task_local]
 #欧洲狂欢杯
 号1默认给我助力 后续号给号1
