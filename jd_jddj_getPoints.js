@@ -7,7 +7,7 @@
 //TG群:https://t.me/passerbyb2021
 
 //[task_local]
-//*/5 * * * * https://raw.githubusercontent.com/linmudaye/linmudaye/blob/main/jd_jddj_getPoints.js
+//*/5 * * * * jd_jddj_getPoints.js, tag=京东到家收水滴, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jd.png, enabled=true
 
 
 //[Script]
