@@ -1,20 +1,14 @@
-
+/*
+京东到家鲜豆庄园收水滴
 //京东到家鲜豆庄园收水滴脚本,支持qx,loon,shadowrocket,surge,nodejs
 //用抓包抓 https://daojia.jd.com/html/index.html 页面cookie填写到下面,暂时不知cookie有效期
 //抓多账号直接清除浏览器缓存再登录新账号,千万别点退出登录,否则cookie失效
 //cookie只要里面的deviceid_pdj_jd=xxx-xxx-xxx;o2o_m_h5_sid=xxx-xxx-xxx关键信息
 //五分钟运行一次
-//boxjs订阅地址:https://gitee.com/passerby-b/javascript/raw/master/JD/passerby-b.boxjs.json
-//TG群:https://t.me/passerbyb2021
-
-//[task_local]
-//京东到家鲜豆庄园收水滴
-//*/5 * * * * https://raw.githubusercontent.com/linmudaye/linmudaye/blob/main/jd_jddj_getPoints.js, tag=京东到家鲜豆庄园收水滴
-
-
-//[Script]
-//京东到家鲜豆庄园收水滴
-//cron "*/5 * * * *" script-path=https://raw.githubusercontent.com/linmudaye/linmudaye/blob/main/jd_jddj_getPoints.js,tag=京东到家鲜豆庄园收水滴
+[task_local]
+#领京豆额外奖励
+0/5 * * * * jd_jddj_getPoints.js, tag=领京豆额外奖励, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jd_bean_home.png, enabled=true
+ */
 
 const $ = new API("京东到家鲜豆庄园收水滴");
 
