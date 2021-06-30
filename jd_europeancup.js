@@ -1,16 +1,16 @@
 /*
-更新地址：https://raw.githubusercontent.com/linmudaye/linmudaye/blob/main/jd_europeancup.js
-cron 55 59 9  * * * jd_europeancup.js
-[task_local]
-#欧洲狂欢杯
-55 59 9  * * * jd_europeancup.js, tag=欧洲狂欢杯, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
+更新地址：https://raw.githubusercontent.com/Wenmoux/scripts/wen/jd/jd_ddnc_farmpark.js
 号1默认给我助力 后续号给号1
 入口 https://lzdz-isv.isvjcloud.com/dingzhi/hisense/europeancup/activity/7431935?activityId=901100032442101&shareUuid=b7f58330cb0844b485afacbdea3c7bca&adsource=null&initHash=/home&shareuserid4minipg=8A+Mf3SBYE8spQtvzQ2VLE7oeVP9kq2pYSH90mYt4m3fwcJlClpxrfmVYaGKuquQkdK3rLBQpEQH9V4tdrrh0w==&shopid=undefined&lng=107.146945&lat=33.255267&sid=cad74d1c843bd47422ae20cadf6fe5aw&un_area=8_573_6627_52446)
+============Quantumultx===============
+[task_local]
+#欧洲狂欢杯
+57 59 9  * * * https://raw.githubusercontent.com/Wenmoux/scripts/wen/jd/jd_europeancup.js, tag=欧洲狂欢杯, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
 */
 const $ = new Env('狂欢欧洲杯');
 //Node.js用户请在jdCookie.js处填写京东ck;
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
-cupExid = $.isNode() ? (process.env.Cupexid ? process.env.Cupexid : 39) : ($.getdata("Cupexid") ? $.getdata("Cupexid") : 39);
+cupExid = $.isNode() ? (process.env.Cupexid ? process.env.Cupexid : 38) : ($.getdata("Cupexid") ? $.getdata("Cupexid") : 38);
 
 const randomCount = $.isNode() ? 20 : 5;
 const notify = $.isNode() ? require('./sendNotify') : '';
@@ -49,7 +49,7 @@ $.shareuuid = "f2be7c5ff90e495abaae9eb927706c48" //俺的助力码
                 $.isLogin = true;
                 $.nickName = '';
                 $.drawresult = ""
-                $.exchange = "10"
+                $.exchange = ""
                 console.log(`\n******开始【京东账号${$.index}】${$.nickName || $.UserName}*********\n`);
                 if (!$.isLogin) {
                     $.msg($.name, `【提示】cookie已失效`, `京东账号${$.index} ${$.nickName || $.UserName}\n请重新登录获取\nhttps://bean.m.jd.com/bean/signIndex.action`, {
@@ -68,6 +68,10 @@ $.shareuuid = "f2be7c5ff90e495abaae9eb927706c48" //俺的助力码
                 await getUserInfo()
                 await getUid()
                 if ($.cando) {
+                    await exchange(cupExid) //兑换
+                    await exchange(cupExid) //兑换
+                    await exchange(cupExid) //兑换
+                    await exchange(cupExid) //兑换
                     await exchange(cupExid) //兑换
                     await getinfo()
                     taskList = $.taskList
