@@ -95,7 +95,7 @@ $.shareuuid = "f2be7c5ff90e495abaae9eb927706c48" //俺的助力码
                         }
 
                     }
-                    await exchange(38) //兑换10豆
+                    await exchange(39) //兑换10豆
                     await getinfo()
 
                     message += `【京东账号${$.index}】${$.nickName || $.UserName}\n${$.cow} \n ${$.exchange}\n`
