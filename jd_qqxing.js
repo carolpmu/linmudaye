@@ -55,7 +55,7 @@ $.shareuuid = "5eadd2afbde54b5597c523f7d658679d"
                 $.foodNum = 0
                 $.nickName = '';
                 $.drawresult = ""
-                $.exchange =20
+                $.exchange =0
                 console.log(`\n******开始【京东账号${$.index}】${$.nickName || $.UserName}*********\n`);
                 if (!$.isLogin) {
                     $.msg($.name, `【提示】cookie已失效`, `京东账号${$.index} ${$.nickName || $.UserName}\n请重新登录获取\nhttps://bean.m.jd.com/bean/signIndex.action`, {
@@ -98,10 +98,10 @@ $.shareuuid = "5eadd2afbde54b5597c523f7d658679d"
                     for (k = 0; k < $.drawchance; k++) {
                         await draw()
                     }
-                    let exchanges =Math.floor($.foodNum/1000)
+                    let exchanges =Math.floor($.foodNum/3000)
                     console.log(`可兑换 ${exchanges} 次 20京🐶`)
                     for(q = 0;q<exchanges && Exchange;q++){
-                    await exchange(13)   
+                    await exchange(14)   
                     }
                     await getinfo()
                     if(!Exchange){console.log("你 默认 不兑换东西,请自行进去活动兑换")}
