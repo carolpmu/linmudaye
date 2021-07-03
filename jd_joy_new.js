@@ -1,10 +1,9 @@
 /**
- 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
- IOS用户支持京东双账号,NodeJs用户支持N个京东账号
- 更新时间：2021-06-21
- 活动入口：京东APP我的-宠汪汪
-
- 完成度 1%，要用的手动执行，先不加cron了
+ #宠汪汪二代目
+ 15 0-23/2 * * * jd_joy.js, tag=京东宠汪汪, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jdcww.png, enabled=true
+ ============Loon===========
+ [Script]
+ cron "15 0-23/2 * * *" script-path=jd_joy.js,tag=宠汪汪二代目
  默认80，10、20、40、80可选
  export feedNum = 80
  默认双人跑
