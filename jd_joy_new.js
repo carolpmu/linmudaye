@@ -9,7 +9,6 @@
  默认双人跑
  export JD_JOY_teamLevel = 2
  */
-
 const $ = new Env("宠汪汪二代目")
 console.log('\n====================Hello World====================\n')
 
@@ -19,7 +18,6 @@ const zlib = require('zlib');
 const vm = require('vm');
 const PNG = require('png-js');
 const UA = require('./USER_AGENTS.js').USER_AGENT;
-const fetch = require('node-fetch');
 const fs = require("fs");
 
 
@@ -571,7 +569,7 @@ $.post = injectToRequest($.post.bind($))
 
         if (tp.receiveStatus === 'unreceive') {
           await award(tp.taskType);
-          await $.wait(5000);
+          await $.wait(3000);
         }
         if (tp.taskName === '浏览频道') {
           for (let i = 0; i < 3; i++) {
@@ -596,7 +594,7 @@ $.post = injectToRequest($.post.bind($))
                 "marketLink": `${t.marketLink || t.marketLinkH5}`,
                 "taskType": "ScanMarket"
               }))
-              await $.wait(5000)
+              await $.wait(3000)
             }
           }
         }
@@ -604,8 +602,10 @@ $.post = injectToRequest($.post.bind($))
           for (let t of tp.followGoodList) {
             if (!t.status) {
               console.log('┖', t.skuName)
+              await beforeTask('follow_good', t.sku)
+              await $.wait(1000)
               await doTask(`sku=${t.sku}`, 'followGood')
-              await $.wait(5000)
+              await $.wait(3000)
             }
           }
         }
@@ -853,7 +853,6 @@ function run(fn = 'match') {
         if (fn === 'receive') {
           console.log('领取赛跑奖励：', data)
         } else {
-          console.log('赛跑', data)
           data = JSON.parse(data);
           let race = data.data.petRaceResult
           if (race === 'participate') {
@@ -867,8 +866,10 @@ function run(fn = 'match') {
           } else if (race === 'unreceive') {
             console.log('开始领奖')
             await run('receive')
+          } else if (race === 'time_over') {
+            console.log('不在比赛时间')
           } else {
-            console.log('这是什么！')
+            console.log('这是什么！', data)
           }
         }
       } catch (e) {
