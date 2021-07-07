@@ -1,11 +1,6 @@
 /*
 更新地址：https://raw.githubusercontent.com/Wenmoux/scripts/wen/jd/jd_ddnc_farmpark.js
-号1默认给作者助力 后续号给号1
-入口 https://lzdz-isv.isvjcloud.com/dingzhi/hisense/europeancup/activity/7431935?activityId=901100032442101)
-============Quantumultx===============
-[task_local]
-#狂欢欧洲杯
-cron 57 59 9  * * * jd_europeancup.js
+cron 57 59 9 * * * jd_europeancup.js
 */
 const $ = new Env('狂欢欧洲杯');
 //Node.js用户请在jdCookie.js处填写京东ck;
