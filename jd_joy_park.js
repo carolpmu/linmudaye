@@ -1,5 +1,6 @@
 /*
 汪汪乐园每日任务
+corn 10 * * * * jd_joy_park.js
 */
 const $ = new Env('汪汪乐园');
 //Node.js用户请在jdCookie.js处填写京东ck;
