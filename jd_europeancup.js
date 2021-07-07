@@ -5,7 +5,7 @@
 ============Quantumultx===============
 [task_local]
 #狂欢欧洲杯
-cron 57 59 9  * * * jd_europeancup.js, tag=狂欢欧洲杯, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
+cron 57 59 9  * * * jd_europeancup.js
 */
 const $ = new Env('狂欢欧洲杯');
 //Node.js用户请在jdCookie.js处填写京东ck;
