@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# cron 5 0,8 * * * jd_qjd.py
 # -*- coding: utf-8 -*
 '''
 项目名称: JD-Script / jd_qjd
