@@ -1,7 +1,7 @@
 /* 
 
 只支持nodejs环境
-14 10 * * *
+cron 14 10 * * * jd_sign.js
 */
 
 const validator = require('./JDJRValidator_Pure.js');
