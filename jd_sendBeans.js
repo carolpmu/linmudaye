@@ -1,7 +1,7 @@
 /*
 * 送豆得豆
 * 活动入口：京东APP-京豆-送豆得豆
-* cron 45 4 * * *
+cron 45 4 * * * jd_sendBeans.js
 * */
 const $ = new Env('送豆得豆');
 const notify = $.isNode() ? require('./sendNotify') : '';
