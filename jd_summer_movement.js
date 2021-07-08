@@ -18,7 +18,7 @@ const { R_OK } = require('fs').constants;
 const vm = require('vm');
 let smashUtils;
 
-const summer_movement_joinjoinjoinhui = $.isNode() ? (process.env.summer_movement_joinjoinjoinhui ? process.env.summer_movement_joinjoinjoinhui : false) : ($.getdata("summer_movement_joinjoinjoinhui") ? $.getdata("summer_movement_joinjoinjoinhui") : false);;//是否入会  true 入会，false 不入会
+const summer_movement_joinjoinjoinhui = $.isNode() ? (process.env.summer_movement_joinjoinjoinhui ? process.env.summer_movement_joinjoinjoinhui : true) : ($.getdata("summer_movement_joinjoinjoinhui") ? $.getdata("summer_movement_joinjoinjoinhui") : false);;//是否入会  true 入会，false 不入会
 
 const ShHelpFlag = $.isNode() ? (process.env.summer_movement_ShHelpFlag ? process.env.summer_movement_ShHelpFlag : true) : ($.getdata("summer_movement_ShHelpFlag") ? $.getdata("summer_movement_ShHelpFlag") : true);;//是否SH助力  true 助力，false 不助力
 
@@ -29,9 +29,7 @@ $.cookie = '';
 $.inviteList = [];
 $.secretpInfo = {};
 $.ShInviteList = [];
-$.innerShInviteList = [
-  ''
-];
+$.innerShInviteList = [];
 if ($.isNode()) {
   Object.keys(jdCookieNode).forEach((item) => {
     cookiesArr.push(jdCookieNode[item])
@@ -60,6 +58,7 @@ const UA = $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT :
       );
   if(summer_movement_joinjoinjoinhui) console.log('\n您设置了入会')
   if(ShHelpFlag) console.log('\n您设置了执行【百元守卫站SH】互助')
+  console.log('该脚本启用了[正道的光]模式\n执行 做任务、做店铺任务、助力 会有几率不执行\n本脚本不让任务一次全部做完\n您可以多跑几次\n\n🐸')
   for (let i = 0; i < cookiesArr.length; i++) {
     if (cookiesArr[i]) {
       $.cookie = cookiesArr[i];
