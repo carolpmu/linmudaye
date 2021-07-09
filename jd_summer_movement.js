@@ -36,9 +36,7 @@ $.cookie = '';
 $.inviteList = [];
 $.secretpInfo = {};
 $.ShInviteList = [];
-$.innerShInviteList = [
-  ''
-];
+$.innerShInviteList = [];
 if ($.isNode()) {
   Object.keys(jdCookieNode).forEach((item) => {
     cookiesArr.push(jdCookieNode[item])
@@ -164,18 +162,16 @@ async function movement() {
       }
     }
 
-    if(aabbiill()){
-      console.log('\n运动\n')
-      $.speedTraining = true;
-      await takePostRequest('olympicgames_startTraining');
-      await $.wait(1000);
-      for(let i=0;i<=3;i++){
-        if($.speedTraining){
-          await takePostRequest('olympicgames_speedTraining');
-          await $.wait(1000);
-        }else{
-          break;
-        }
+    console.log('\n运动\n')
+    $.speedTraining = true;
+    await takePostRequest('olympicgames_startTraining');
+    await $.wait(1000);
+    for(let i=0;i<=3;i++){
+      if($.speedTraining){
+        await takePostRequest('olympicgames_speedTraining');
+        await $.wait(1000);
+      }else{
+        break;
       }
     }
     
