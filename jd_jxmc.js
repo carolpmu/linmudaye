@@ -1,5 +1,4 @@
 /*
-惊喜牧场
 cron 20 0-23/3 * * * jd_jxmc.js
 */
 // prettier-ignore
