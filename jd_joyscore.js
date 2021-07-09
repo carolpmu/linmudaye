@@ -1,6 +1,6 @@
 /*
 京享值PK
-cron 15 2,7,18 * * * jd_joyscore.js
+cron 15 * * * * jd_joyscore.js
 更新时间：2021-7-05
 活动入口：京东APP-我的-京享值
 已支持IOS双京东账号,Node.js支持N个京东账号
