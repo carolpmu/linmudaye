@@ -10,7 +10,7 @@ https://lzdz-isv.isvjcloud.com/dingzhi/qqxing/pasture/activity?activityId=901210
 ============Quantumultx===============
 [task_local]
 #星系牧场
-cron 1 0-23/2 * * * jd_qqxing.js, tag=星系牧场, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
+1 0-23/2 * * * https://raw.githubusercontent.com/Wenmoux/scripts/wen/jd/jd_qqxing.js, tag=星系牧场, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
 */
 const $ = new Env('QQ星系牧场');
 //Node.js用户请在jdCookie.js处填写京东ck;
@@ -34,7 +34,7 @@ if ($.isNode()) {
 
 const JD_API_HOST = `https://api.m.jd.com/client.action`;
 message = ""
-$.shareuuid = "7d6b4dfb043a4ff28835daec3ee19a24"
+$.shareuuid = "5eadd2afbde54b5597c523f7d658679d"
     !(async () => {
         if (!cookiesArr[0]) {
             $.msg($.name, '【提示】请先获取cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/', {
@@ -105,7 +105,7 @@ $.shareuuid = "7d6b4dfb043a4ff28835daec3ee19a24"
                     }
                     await getinfo()                     
                     if(!Exchange){console.log("你 默认 不兑换东西,请自行进去活动兑换")}                    
-                    message += `【京东账号${$.index}】${$.nickName || $.UserName}\n${$.cow} 兑换京🐶 ${$.exchange}  ${$.drawresult}\n`
+                    message += `【京东账号${$.index}】${$.nickName || $.UserName}\n${$.cow} 兑换京🐶 ${$.exchange}  ${$.drawresult}\n\n`
                     if($.index%3===0) 
                    {
                   await $.wait(60*1000) 
@@ -486,7 +486,7 @@ function exchange(id) {
                  //   console.log()
 if(data.result){
 console.log(`兑换 ${data.data.rewardName}成功`)
-$.exchange += 50
+$.exchange += 20
 }else{
 console.log(JSON.stringify(data))
 }
