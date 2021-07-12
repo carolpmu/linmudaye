@@ -2,7 +2,7 @@
 
 https://wbbny.m.jd.com/babelDiy/Zeus/2rtpffK8wqNyPBH6wyUDuBKoAbCt/index.html
 
-cron 14/41 7-14 * * * https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_summer_movement_help.js
+cron 14/41 7-14 * * * https://raw.githubusercontent.com/smiek2221/scripts/master/jd_summer_movement_help.js
 
 */
 
@@ -82,8 +82,8 @@ const UA = $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT :
   }
   // 助力
   let res = [], res2 = [];
-  $.innerShInviteList = await getAuthorShareCode('https://ghproxy.com/https://raw.githubusercontent.com/linmudaye/linmudaye/main/summer_movement_one.json');
-  res2 = await getAuthorShareCode('https://ghproxy.com/https://raw.githubusercontent.com/linmudaye/linmudaye/main/summer_movement.json');
+  $.innerShInviteList = await getAuthorShareCode('https://cdn.jsdelivr.net/gh/linmudaye/updateTeam@master/shareCodes/summer_movement_one.json');
+  res2 = await getAuthorShareCode('https://cdn.jsdelivr.net/gh/linmudaye/updateTeam@master/shareCodes/summer_movement.json');
   $.ShInviteLists = []
   if (ShHelpAuthorFlag) {
     $.innerShInviteLists = getRandomArrayElements([...res, ...res2], [...res, ...res2].length);
