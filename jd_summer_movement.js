@@ -21,7 +21,7 @@ const $ = new Env('燃动夏季');
 const fs = require('fs');
 const stat = fs.stat;
 const path = require('path');
-const MoveMentFaker = require('./utils/MoveMentFaker')
+const MoveMentFaker = require('./jdMoveMentFaker')
 const notify = $.isNode() ? require('./sendNotify') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
