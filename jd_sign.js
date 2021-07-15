@@ -7,7 +7,7 @@ npm i png-js 或者 npm i png-js -S
 */
 
 const validator = require('./JDJRValidator_Pure.js');
-const Faker=require('./jdsign_validate.js') 
+const Faker=require('./jdsign_validate.js')
 
 const $ = new Env('京东签到图形验证');
 const notify = $.isNode() ? require('./sendNotify') : '';
@@ -221,7 +221,7 @@ function getEid(arr) {
 }
 
 function taskUrl(turnTableId) {
-  const url = `https://jdjoy.jd.com/api/turncard/channel/detail?turnTableId=${turnTableId}&invokeKey=NRp8OPxZMFXmGkaE`
+  const url = `https://jdjoy.jd.com/api/turncard/channel/detail?turnTableId=${turnTableId}&invokeKey=qRKHmL4sna8ZOP9F`
   return {
     url,
     headers: {
@@ -238,7 +238,7 @@ function taskUrl(turnTableId) {
 }
 
 function tasPostkUrl(turnTableId) {
-  const url = `https://jdjoy.jd.com/api/turncard/channel/sign?turnTableId=${turnTableId}&fp=${fp}&eid=${eid}&invokeKey=NRp8OPxZMFXmGkaE`
+  const url = `https://jdjoy.jd.com/api/turncard/channel/sign?turnTableId=${turnTableId}&fp=${fp}&eid=${eid}&invokeKey=qRKHmL4sna8ZOP9F`
   return {
     url,
     headers: {
