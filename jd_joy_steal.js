@@ -23,7 +23,7 @@ cron "10 0-21/3 * * *" script-path=jd_joy_steal.js,tag=宠汪汪偷好友积分�
 宠汪汪偷好友积分与狗粮 = type=cron,script-path=jd_joy_steal.js, cronexpr="10 0-21/3 * * *", timeout=3600, enable=true
 */
 const $ = new Env('宠汪汪偷好友积分与狗粮');
-const validator = require('./JDJRValidator_Pure');
+const validator = require('./utils/JDJRValidator_Pure');
 $.get = validator.injectToRequest($.get.bind($));
 $.post = validator.injectToRequest($.post.bind($));
 const notify = $.isNode() ? require('./sendNotify') : '';
@@ -641,7 +641,7 @@ function taskPostUrl(url, Host, reqSource) {
 }
 function taskUrl(functionId, friendPin) {
   let opt = {
-    url: `//jdjoy.jd.com/common/pet/${functionId}?friendPin=${encodeURI(friendPin)}&invokeKey=NRp8OPxZMFXmGkaE`,
+    url: `//jdjoy.jd.com/common/pet/${functionId}?friendPin=${encodeURI(friendPin)}&invokeKey=qRKHmL4sna8ZOP9F`,
     // url: `//draw.jdfcloud.com/common/pet/getPetTaskConfig?reqSource=h5`,
     method: "GET",
     data: {},
