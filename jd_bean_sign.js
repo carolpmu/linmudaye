@@ -1,6 +1,6 @@
 /*
 京东多合一签到,自用,可N个京东账号
-cron 7 0,17 * * * jd_bean_sign.js
+活动入口：各处的签到汇总
 Node.JS专用
 IOS软件用户请使用 https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js
 更新时间：2021-6-18
@@ -16,7 +16,7 @@ const fs = require('fs')
 const download = require('download');
 let resultPath = "./result.txt";
 let JD_DailyBonusPath = "./JD_DailyBonus.js";
-let outPutUrl = './';
+let outPutUrl = './utils';
 let NodeSet = 'CookieSet.json';
 let cookiesArr = [], cookie = '', allMessage = '';
 
