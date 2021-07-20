@@ -38,7 +38,7 @@ $.result = [];
 $.shareCodes = [];
 let cookiesArr = [], cookie = '';
 
-const randomCount = $.isNode() ? 3 : 3;
+const randomCount = $.isNode() ? 0 : 3;
 if ($.isNode()) {
   Object.keys(jdCookieNode).forEach((item) => {
     cookiesArr.push(jdCookieNode[item])
@@ -58,11 +58,11 @@ $.appId = 10028;
   $.CryptoJS = $.isNode() ? require('crypto-js') : CryptoJS;
   await requestAlgo();
   await $.wait(1000)
-  let res = await getAuthorShareCode('https://raw.githubusercontent.com/linmudaye/updateTeam/master/shareCodes/cfd.json')
+  let res = await getAuthorShareCode('')
   if (!res) {
-    $.http.get({url: 'https://purge.jsdelivr.net/gh/linmudaye/updateTeam@master/shareCodes/cfd.json'}).then((resp) => {}).catch((e) => console.log('刷新CDN异常', e));
+    $.http.get({url: ''}).then((resp) => {}).catch((e) => console.log('刷新CDN异常', e));
     await $.wait(1000)
-    res = await getAuthorShareCode('https://cdn.jsdelivr.net/gh/linmudaye/updateTeam@master/shareCodes/cfd.json')
+    res = await getAuthorShareCode('')
   }
   $.strMyShareIds = [...(res && res.shareId || [])]
   for (let i = 0; i < cookiesArr.length; i++) {
@@ -107,7 +107,7 @@ $.appId = 10028;
       console.log(`\n助力作者\n`);
       for (let id of $.strMyShareIds) {
         console.log(`账号${$.UserName} 去助力 ${id}`)
-        await helpByStage(id)
+    //  await helpByStage(id)
         if (!$.canHelp) break
         await $.wait(3000)
       }
@@ -968,7 +968,6 @@ async function getBuildInfo(body, buildList, type = true) {
               default:
                 break
             }
-            // console.log(data)
             if (data.dwBuildLvl === 0) {
               console.log(`创建建筑`)
               console.log(`【${buildNmae}】当前建筑还未创建，开始创建`)
@@ -985,16 +984,15 @@ async function getBuildInfo(body, buildList, type = true) {
             await getUserInfo(false)
             console.log(`升级建筑`)
             console.log(`【${buildNmae}】当前等级：${buildList.dwLvl} 升级获得财富：${data.ddwLvlRich}`)
-            console.log(`【${buildNmae}】升级需要${data.ddwNextLvlCostCoin}金币，当前拥有${$.info.ddwCoinBalance}`)
-            if(data.dwCanLvlUp > 0 && $.info.ddwCoinBalance >= data.ddwNextLvlCostCoin) {
+            console.log(`【${buildNmae}】升级需要${data.ddwNextLvlCostCoin}金币，当前拥有${$.info.ddwCoinBalance}，保留三倍升级所需金币${data.ddwNextLvlCostCoin * 3}`)
+            if(data.dwCanLvlUp > 0 && $.info.ddwCoinBalance >= data.ddwNextLvlCostCoin * 3) {
               console.log(`【${buildNmae}】满足升级条件，开始升级`)
               const body = `ddwCostCoin=${data.ddwNextLvlCostCoin}&strBuildIndex=${data.strBuildIndex}`
               let buildLvlUpRes = await buildLvlUp(body)
               if (buildLvlUpRes.iRet === 0) {
                 console.log(`【${buildNmae}】升级成功\n`)
               } else {
-                console.log(`${buildLvlUpRes}\n`)
-                await $.wait(2000)
+                console.log(`【${buildNmae}】升级失败：${buildLvlUpRes.sErrMsg}\n`)
               }
             } else {
               console.log(`【${buildNmae}】不满足升级条件，跳过升级\n`)
@@ -1498,16 +1496,16 @@ function readShareCode() {
   console.log(`开始`)
   return new Promise(async resolve => {
     $.get({
-      url: `http://share.turinglabs.net/api/v3/jxbfd/query/${randomCount}/`,
+      url: `/`,
       'timeout': 10000
     }, (err, resp, data) => {
       try {
         if (err) {
-          console.log(`${JSON.stringify(err)}`)
-          console.log(`${$.name} API请求失败，请检查网路重试`)
+     //  console.log(`${JSON.stringify(err)}`)
+     //  console.log(`${$.name} API请求失败，请检查网路重试`)
         } else {
           if (data) {
-            console.log(`随机取${randomCount}个码放到您固定的互助码后面(不影响已有固定互助)`)
+    //    console.log(`随机取${randomCount}个码放到您固定的互助码后面(不影响已有固定互助)`)
             data = JSON.parse(data);
           }
         }
