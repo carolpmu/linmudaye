@@ -3,17 +3,21 @@
 cron 59 11,12,23 * * * jd_cfdtx.js
 更新时间：2021-7-20
 活动入口：京喜APP-我的-京喜财富岛提现
+
 已支持IOS双京东账号,Node.js支持N个京东账号
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 ============Quantumultx===============
 [task_local]
 #京喜财富岛提现
 59 11,12,23 * * * https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_cfdtx.js, tag=京喜财富岛提现, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jxcfd.png, enabled=true
+
 ================Loon==============
 [Script]
 cron "59 11,12,23 * * *" script-path=https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_cfdtx.js,tag=京喜财富岛提现
+
 ===============Surge=================
 京喜财富岛提现 = type=cron,cronexp="59 11,12,23 * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_cfdtx.js
+
 ============小火箭=========
 京喜财富岛提现 = type=cron,script-path=https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_cfdtx.js, cronexpr="59 11,12,23 * * *", timeout=3600, enable=true
  */
@@ -112,13 +116,14 @@ async function cfd() {
     }
 
     const beginInfo = await getUserInfo(false);
-    if ($.num % 2 !== 0) {
-      console.log(`等待`)
-      await $.wait(2000)
-    }
     if (beginInfo.Fund.ddwFundTargTm === 0) {
       console.log(`还未开通活动，请先开通\n`)
       return
+    }
+
+    if ($.num % 2 !== 0) {
+      console.log(`等待`)
+      await $.wait(2000)
     }
 
     console.log(`获取提现资格`)
@@ -186,6 +191,8 @@ async function userCashOutState(type = true) {
                     } else {
                       await userCashOutState()
                     }
+                  } else {
+                    console.log(`${vo.ddwMoney / 100}元库存不足`)
                   }
                 }
               } else {
@@ -308,7 +315,7 @@ function buildLvlUp(body) {
 // 获取用户信息
 function getUserInfo(showInvite = true) {
   return new Promise(async (resolve) => {
-    $.get(taskUrl(`user/QueryUserInfo`), (err, resp, data) => {
+    $.get(taskUrl(`user/QueryUserInfo`, `strPgUUNum=${token['farm_jstoken']}&strPgtimestamp=${token['timestamp']}&strPhoneID=${token['phoneid']}`), (err, resp, data) => {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)
