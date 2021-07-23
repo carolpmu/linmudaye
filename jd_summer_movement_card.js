@@ -2,7 +2,7 @@
  *  每日跑一次
  *  燃动夏季领店铺任务 和 燃动夏季领会员奖励（如果你已经是会员，则会领取奖励成功，若不是会员，则需要手动卡开）
  *  蚊子腿金币
- *  cron 7 12,13 * * *
+cron 7 12,13 * * * jd_summer_movement_card.js
  * */
 const $ = new Env('燃动夏季会员');
 const notify = $.isNode() ? require('./sendNotify') : '';
