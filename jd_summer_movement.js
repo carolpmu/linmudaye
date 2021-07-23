@@ -31,7 +31,7 @@ if ($.isNode() && process.env.summer_movement_HelpHelpHelpFlag) {
 }
 
 
-const ShHelpAuthorFlag = true;//是否助力作者SH  true 助力，false 不助力
+const ShHelpAuthorFlag = false;//是否助力作者SH  true 助力，false 不助力
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [];
 $.cookie = '';
@@ -267,6 +267,7 @@ async function movement() {
             console.log(`任务失败`);
             await $.wait(getRndInteger(2000, 3000));
           }
+          if($.hotFlag) break
         }
       } else if ($.oneTask.taskType === 2 && $.oneTask.status === 1 && $.oneTask.scoreRuleVos[0].scoreRuleType === 2){
         console.log(`做任务：${$.oneTask.taskName};等待完成 (实际不会添加到购物车)`);
@@ -284,6 +285,7 @@ async function movement() {
           await takePostRequest('add_car');
           await $.wait(getRndInteger(1000, 2000));
           needTime --;
+          if($.hotFlag) break
         }
       }else if ($.oneTask.taskType === 2 && $.oneTask.status === 1 && $.oneTask.scoreRuleVos[0].scoreRuleType === 0){
         $.activityInfoList = $.oneTask.productInfoVos ;
@@ -303,8 +305,10 @@ async function movement() {
             console.log(`任务失败`);
             await $.wait(getRndInteger(2000, 3000));
           }
+          if($.hotFlag) break
         }
       }
+      if($.hotFlag) break
     }
     
     //==================================微信任务========================================================================
@@ -330,7 +334,9 @@ async function movement() {
           await $.wait(getRndInteger(1000, 2000));
           console.log(`任务完成`);
         }
+        if($.hotFlag) break
       }
+      if($.hotFlag) break
     }
 
     // 店铺
@@ -374,7 +380,9 @@ async function movement() {
             await $.wait(getRndInteger(2000, 3000));
             console.log(`任务完成`);
           }
+          if($.hotFlag) break
         }
+        if($.hotFlag) break
       }
       if(taskbool) await $.wait(1000);
       let boxLotteryNum = $.shopResult.boxLotteryNum;
@@ -383,6 +391,7 @@ async function movement() {
         //抽奖
         await takePostRequest('olympicgames_boxShopLottery');
         await $.wait(3000);
+        if($.hotFlag) break
       }
       // let wishLotteryNum = $.shopResult.wishLotteryNum;
       // for (let j = 0; j < wishLotteryNum; j++) {
@@ -392,7 +401,9 @@ async function movement() {
       //   await $.wait(3000);
       // }
       if(taskbool) await $.wait(3000);
+      if($.hotFlag) break
     }
+    $.wait(2000);
 
   } catch (e) {
     $.logErr(e)
@@ -605,6 +616,11 @@ async function dealReturn(type, res) {
     case 'olympicgames_getFeedDetail':
       if (data.code === 0) {
         $.feedDetailInfo = data.data.result.addProductVos[0] || [];
+      }else if(data.data && data.data.bizMsg){
+        console.log(data.data.bizMsg);
+        if(data.data.bizMsg.indexOf('活动太火爆') > -1){
+          $.hotFlag = true;
+        }
       }
       break;
     case 'add_car':
@@ -674,6 +690,11 @@ async function dealReturn(type, res) {
     case 'olympicgames_shopLotteryInfo':
       if (data.code === 0) {
         $.shopResult = data.data.result;
+      }else if(data.data && data.data.bizMsg){
+        console.log(data.data.bizMsg);
+        if(data.data.bizMsg.indexOf('活动太火爆') > -1){
+          $.hotFlag = true;
+        }
       }
       break;
     case 'qryCompositeMaterials':
@@ -688,6 +709,9 @@ async function dealReturn(type, res) {
         console.log(`签到获得：${data.data.result.score}`);
       }else if(data.data && data.data.bizMsg){
         console.log(data.data.bizMsg);
+        if(data.data.bizMsg.indexOf('活动太火爆') > -1){
+          $.hotFlag = true;
+        }
       }else{
         console.log(data);
       }
@@ -712,6 +736,9 @@ async function dealReturn(type, res) {
         }
       } else if (data.data && data.data.bizMsg) {
         console.log(data.data.bizMsg);
+        if(data.data.bizMsg.indexOf('活动太火爆') > -1){
+          $.hotFlag = true;
+        }
       } else {
         console.log(res);
       }
