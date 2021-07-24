@@ -115,15 +115,15 @@ async function cfd() {
       }
     }
 
+    if ($.num % 2 !== 0) {
+      console.log(`等待`)
+      await $.wait(2000)
+    }
+
     const beginInfo = await getUserInfo(false);
     if (beginInfo.Fund.ddwFundTargTm === 0) {
       console.log(`还未开通活动，请先开通\n`)
       return
-    }
-
-    if ($.num % 2 !== 0) {
-      console.log(`等待`)
-      await $.wait(2000)
     }
 
     console.log(`获取提现资格`)
@@ -188,6 +188,7 @@ async function userCashOutState(type = true) {
                     if (cashOutRes.iRet === 0) {
                       $.money = vo.ddwMoney / 100
                       console.log(`提现成功获得：${$.money}元`)
+                      break
                     } else {
                       await userCashOutState()
                     }
