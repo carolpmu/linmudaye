@@ -38,7 +38,7 @@ $.result = [];
 $.shareCodes = [];
 let cookiesArr = [], cookie = '', token = '';
 
-const randomCount = $.isNode() ? 3 : 3;
+const randomCount = $.isNode() ? 0 : 3;
 if ($.isNode()) {
   Object.keys(jdCookieNode).forEach((item) => {
     cookiesArr.push(jdCookieNode[item])
@@ -58,11 +58,11 @@ $.appId = 10028;
   $.CryptoJS = $.isNode() ? require('crypto-js') : CryptoJS;
   await requestAlgo();
   await $.wait(1000)
-  let res = await getAuthorShareCode('https://raw.githubusercontent.com/linmudaye/updateTeam/master/shareCodes/cfd.json')
+  let res = await getAuthorShareCode('')
   if (!res) {
-    $.http.get({url: 'https://purge.jsdelivr.net/gh/linmudaye/updateTeam@master/shareCodes/cfd.json'}).then((resp) => {}).catch((e) => console.log('刷新CDN异常', e));
+    $.http.get({url: ''}).then((resp) => {}).catch((e) => console.log('刷新CDN异常', e));
     await $.wait(1000)
-    res = await getAuthorShareCode('https://cdn.jsdelivr.net/gh/linmudaye/updateTeam@master/shareCodes/cfd.json')
+    res = await getAuthorShareCode('')
   }
   $.strMyShareIds = [...(res && res.shareId || [])]
   for (let i = 0; i < cookiesArr.length; i++) {
@@ -108,7 +108,7 @@ $.appId = 10028;
       console.log(`\n助力作者\n`);
       for (let id of $.strMyShareIds) {
         console.log(`账号${$.UserName} 去助力 ${id}`)
-        await helpByStage(id)
+  //    await helpByStage(id)
         if (!$.canHelp) break
         await $.wait(3000)
       }
@@ -986,7 +986,7 @@ async function getBuildInfo(body, buildList, type = true) {
             console.log(`升级建筑`)
             console.log(`【${buildNmae}】当前等级：${buildList.dwLvl} 升级获得财富：${data.ddwLvlRich}`)
             console.log(`【${buildNmae}】升级需要${data.ddwNextLvlCostCoin}金币，当前拥有${$.info.ddwCoinBalance}，保留三倍升级所需金币${data.ddwNextLvlCostCoin * 3}`)
-            if(data.dwCanLvlUp > 0 && $.info.ddwCoinBalance >= data.ddwNextLvlCostCoin * 3) {
+            if(data.dwCanLvlUp > 0 && $.info.ddwCoinBalance >= (data.ddwNextLvlCostCoin * 3)) {
               console.log(`【${buildNmae}】满足升级条件，开始升级`)
               const body = `ddwCostCoin=${data.ddwNextLvlCostCoin}&strBuildIndex=${data.strBuildIndex}`
               let buildLvlUpRes = await buildLvlUp(body)
@@ -1134,7 +1134,7 @@ function getAuthorShareCode(url) {
 // 获取用户信息
 function getUserInfo(showInvite = true) {
   return new Promise(async (resolve) => {
-    $.get(taskUrl(`user/QueryUserInfo`, `strPgUUNum=${token['farm_jstoken']}&strPgtimestamp=${token['timestamp']}&strPhoneID=${token['phoneid']}`), (err, resp, data) => {
+    $.get(taskUrl(`user/QueryUserInfo`, `ddwTaskId=&strShareId=&strMarkList=${escape('guider_step,collect_coin_auth,guider_medal,guider_over_flag,build_food_full,build_sea_full,build_shop_full,build_fun_full,medal_guider_show,guide_guider_show,guide_receive_vistor,daily_task,guider_daily_task')}&strPgUUNum=${token['farm_jstoken']}&strPgtimestamp=${token['timestamp']}&strPhoneID=${token['phoneid']}`), (err, resp, data) => {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)
@@ -1149,11 +1149,12 @@ function getUserInfo(showInvite = true) {
             strMyShareId,
             dwLandLvl,
             Fund = {},
-            StoryInfo = {}
+            StoryInfo = {},
+            Business = {}
           } = data;
           if (showInvite) {
             console.log(`\n获取用户信息：${sErrMsg}\n${$.showLog ? data : ""}`);
-            console.log(`\n当前等级:${dwLandLvl},金币:${ddwCoinBalance},财富值:${ddwRichBalance}\n`)
+            console.log(`\n当前等级:${dwLandLvl},金币:${ddwCoinBalance},财富值:${ddwRichBalance},连续营业天数:${Business.dwBussDayNum},离线收益:${Business.ddwCoin}\n`)
           }
           if (showInvite && strMyShareId) {
             console.log(`财富岛好友互助码每次运行都变化,旧的可继续使用`);
@@ -1497,16 +1498,16 @@ function readShareCode() {
   console.log(`开始`)
   return new Promise(async resolve => {
     $.get({
-      url: `http://share.turinglabs.net/api/v3/jxbfd/query/${randomCount}/`,
+      url: `/`,
       'timeout': 10000
     }, (err, resp, data) => {
       try {
         if (err) {
-          console.log(`${JSON.stringify(err)}`)
-          console.log(`${$.name} API请求失败，请检查网路重试`)
+   //   console.log(`${JSON.stringify(err)}`)
+   //   console.log(`${$.name} API请求失败，请检查网路重试`)
         } else {
           if (data) {
-            console.log(`随机取${randomCount}个码放到您固定的互助码后面(不影响已有固定互助)`)
+   //   console.log(`随机取${randomCount}个码放到您固定的互助码后面(不影响已有固定互助)`)
             data = JSON.parse(data);
           }
         }
