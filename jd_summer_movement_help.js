@@ -2,7 +2,7 @@
 
 https://wbbny.m.jd.com/babelDiy/Zeus/2rtpffK8wqNyPBH6wyUDuBKoAbCt/index.html
 
-cron 14/41 7-14 * * * https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_summer_movement_help.js
+cron 14,41 7-14 * * * https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_summer_movement_help.js
 
 */
 
@@ -104,13 +104,13 @@ getUA()
   let res = [], res2 = [];
   $.ShInviteLists = []
   if (ShHelpAuthorFlag) {
-    $.innerShInviteList = await getAuthorShareCode('');
-    res2 = await getAuthorShareCode('');
+    $.innerShInviteList = await getAuthorShareCode('https://raw.githubusercontent.com/linmudaye/updateTeam/master/shareCodes/summer_movement_one.json');
+    res2 = await getAuthorShareCode('https://raw.githubusercontent.com/linmudaye/updateTeam/master/shareCodes/summer_movement.json');
     if(!$.innerShInviteList[0]){
-      $.innerShInviteList = await getAuthorShareCode('');
+      $.innerShInviteList = await getAuthorShareCode('https://gitee.com/linmudaye/updateTeam/raw/master/shareCodes/summer_movement_one.json');
     }
     if(!res2[0]){
-      res2 = await getAuthorShareCode('');
+      res2 = await getAuthorShareCode('https://gitee.com/linmudaye/updateTeam/raw/master/shareCodes/summer_movement.json');
     }
     $.innerShInviteLists = getRandomArrayElements([...res, ...res2], [...res, ...res2].length);
     $.ShInviteLists.push(...$.ShInviteList,...$.innerShInviteList,...$.innerShInviteLists);
@@ -118,15 +118,28 @@ getUA()
     $.ShInviteLists.push(...$.ShInviteList);
   }
   for (let i = 0; i < cookiesArr.length; i++) {
-    $.cookie = cookiesArr[i];
-    $.canHelp = true;
-    $.hotFlag = false;
-    $.UserName = decodeURIComponent($.cookie.match(/pt_pin=([^; ]+)(?=;?)/) && $.cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1]);
     if (!$.secretpInfo[$.UserName]) {
       continue;
     }
-    // $.secretp = $.secretpInfo[$.UserName];
     $.index = i + 1;
+    let out = false
+    for(let c of outuserIdArr){
+        if(c == $.index) {
+            out = true
+            break
+        }
+    }
+    if(out) continue
+    $.canHelp = true;
+    $.hotFlag = false;
+    $.cookie = cookiesArr[i] + "pwdt_id:" + encodeURIComponent($.UserName) + ";";
+    $.UserName = decodeURIComponent($.cookie.match(/pt_pin=([^; ]+)(?=;?)/) && $.cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1]);
+    $.cookie = $.cookie + "pwdt_id:" + encodeURIComponent($.UserName) + ";";
+    $.nickName = $.UserName;
+    $.joyytoken = ''
+    joyytoken_count = 1
+    getUA()
+    // $.secretp = $.secretpInfo[$.UserName];
     if (new Date().getUTCHours() + 8 >= 8) {
       if(Number(summer_movement_ShHelpFlag) === 1){
         if ($.ShInviteLists && $.ShInviteLists.length) console.log(`\n******开始内部京东账号【百元守卫战SH】助力*********\n`);
