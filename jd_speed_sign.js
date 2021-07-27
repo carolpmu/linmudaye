@@ -115,9 +115,9 @@ function showMsg() {
 async function signInit() {
   return new Promise(resolve => {
     $.get(taskUrl('speedSignInit', {
-      "activityId": "8a8fabf3cccb417f8e691b6774938bc2",
+      "activityId": "31U4T6S4PbcK83HyLPioeCWrD63j",
       "kernelPlatform": "RN",
-      "inviterId":"U44jAghdpW58FKgfqPdotA=="
+      "inviterId":"TGBLO4rsDAc63O5ILlfBlg"
     }), async (err, resp, data) => {
       try {
         if (err) {
