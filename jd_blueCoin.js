@@ -1,5 +1,5 @@
 /*
-东东超市兑换奖品 脚本地址：https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_blueCoin.js
+东东超市兑换奖品 脚本地址：https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_blueCoin.js
 感谢@yangtingxiao提供PR
 更新时间：2021-6-7
 活动入口：京东APP我的-更多工具-东东超市
@@ -8,24 +8,24 @@
 ============QuantumultX==============
 [task_local]
 #东东超市兑换奖品
-59 23 * * * https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_blueCoin.js, tag=东东超市兑换奖品, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jxc.png, enabled=true
+59 58 23 * * * https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_blueCoin.js, tag=东东超市兑换奖品, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jxc.png, enabled=true
 
 ====================Loon=================
 [Script]
-cron "59 23 * * *" script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_blueCoin.js,tag=东东超市兑换奖品
+cron "59 58 23 * * *" script-path=https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_blueCoin.js,tag=东东超市兑换奖品
 
 ===================Surge==================
-东东超市兑换奖品 = type=cron,cronexp="59 23 * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_blueCoin.js
+东东超市兑换奖品 = type=cron,cronexp="59 58 23 * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_blueCoin.js
 
 ============小火箭=========
-东东超市兑换奖品 = type=cron,script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_blueCoin.js, cronexpr="59 23 * * *", timeout=3600, enable=true
+东东超市兑换奖品 = type=cron,script-path=https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_blueCoin.js, cronexpr="59 58 23 * * *", timeout=3600, enable=true
  */
 const $ = new Env('东东超市兑换奖品');
 const notify = $.isNode() ? require('./sendNotify') : '';
 let allMessage = '';
 //Node.js用户请在jdCookie.js处填写京东ck;
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
-let coinToBeans = $.getdata('coinToBeans') || '超值京豆包'; //兑换多少数量的京豆（20或者1000），0表示不兑换，默认不兑换京豆，如需兑换把0改成20或者1000，或者'商品名称'(商品名称放到单引号内)即可
+let coinToBeans = $.getdata('coinToBeans') || 0; //兑换多少数量的京豆（20或者1000），0表示不兑换，默认不兑换京豆，如需兑换把0改成20或者1000，或者'商品名称'(商品名称放到单引号内)即可
 let jdNotify = false;//是否开启静默运行，默认false关闭(即:奖品兑换成功后会发出通知提示)
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '';
@@ -113,7 +113,7 @@ Date.prototype.Format = function (fmt) { //author: meizz
 
 async function PrizeIndex() {
   let nowtime = new Date().Format("s.S")
-  let starttime = process.env.SM_STARTTIME ? process.env.SM_STARTTIME : 59;
+  let starttime = $.isNode() ? (process.env.SM_STARTTIME ? process.env.SM_STARTTIME * 1 : 59) : ($.getdata('SM_STARTTIME') ? $.getdata('SM_STARTTIME') * 1 : 59);
   if(nowtime < 59) {
     let sleeptime = (starttime - nowtime) * 1000;
     console.log(`等待时间 ${sleeptime / 1000}`);
@@ -353,15 +353,15 @@ function smtg_obtainPrize(prizeId, timeout = 0, functionId = 'smt_exchangePrize'
           if (safeGet(data)) {
             data = JSON.parse(data);
             $.data = data;
-            if ($.data.data.bizCode !== 0 && $.data.data.bizCode !== 106) {
+            if ($.data.data.bizCode !== 0 && $.data.data.bizCode !== 400) {
               $.beanerr = `${$.data.data.bizMsg}`;
               //console.log(`【京东账号${$.index}】${$.nickName} 换取京豆失败：${$.data.data.bizMsg}`)
               return
             }
-            if ($.data.data.bizCode === 106) {
+            if ($.data.data.bizCode === 400) {
               $.errBizCodeCount ++;
               console.log(`debug 兑换京豆活动火爆次数:${$.errBizCodeCount}`);
-              if ($.errBizCodeCount >= 20) return
+              if ($.errBizCodeCount >= 3) return
             }
             if ($.data.data.bizCode === 0) {
               if (`${coinToBeans}` === '1000') {
