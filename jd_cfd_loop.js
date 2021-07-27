@@ -1,6 +1,5 @@
 /*
 京喜财富岛热气球挂机
-
 更新时间：2021-7-21
 活动入口：京喜APP-我的-京喜财富岛
 */
@@ -227,8 +226,10 @@ async function pickshell(body) {
 
 // 热气球接客
 async function speedUp() {
+  let strBuildIndexArr = ['food', 'sea', 'shop', 'fun']
+  let strBuildIndex = strBuildIndexArr[Math.floor((Math.random() * strBuildIndexArr.length))]
   return new Promise(async (resolve) => {
-    $.get(taskUrl(`user/SpeedUp`, `strBuildIndex=food`), async (err, resp, data) => {
+    $.get(taskUrl(`user/SpeedUp`, `strBuildIndex=${strBuildIndex}`), async (err, resp, data) => {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)
