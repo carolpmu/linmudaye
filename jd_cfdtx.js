@@ -3,17 +3,21 @@
 cron 59 11,12,23 * * * jd_cfdtx.js
 更新时间：2021-7-20
 活动入口：京喜APP-我的-京喜财富岛提现
+
 已支持IOS双京东账号,Node.js支持N个京东账号
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 ============Quantumultx===============
 [task_local]
 #京喜财富岛提现
 59 11,12,23 * * * https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_cfdtx.js, tag=京喜财富岛提现, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jxcfd.png, enabled=true
+
 ================Loon==============
 [Script]
 cron "59 11,12,23 * * *" script-path=https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_cfdtx.js,tag=京喜财富岛提现
+
 ===============Surge=================
 京喜财富岛提现 = type=cron,cronexp="59 11,12,23 * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_cfdtx.js
+
 ============小火箭=========
 京喜财富岛提现 = type=cron,script-path=https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_cfdtx.js, cronexpr="59 11,12,23 * * *", timeout=3600, enable=true
  */
@@ -102,8 +106,8 @@ async function cfd() {
   try {
     nowTimes = new Date(new Date().getTime() + new Date().getTimezoneOffset() * 60 * 1000 + 8 * 60 * 60 * 1000)
     if ((nowTimes.getHours() === 11 || nowTimes.getHours() === 23) && nowTimes.getMinutes() === 59) {
-      let nowtime = new Date().Format("s")
-      let starttime = $.isNode() ? (process.env.CFD_STARTTIME ? process.env.CFD_STARTTIME * 1 : 59.9) : ($.getdata('CFD_STARTTIME') ? $.getdata('CFD_STARTTIME') * 1 : 59.9);
+      let nowtime = new Date().Format("s.S")
+      let starttime = $.isNode() ? (process.env.CFD_STARTTIME ? process.env.CFD_STARTTIME * 1 : 60) : ($.getdata('CFD_STARTTIME') ? $.getdata('CFD_STARTTIME') * 1 : 60);
       if(nowtime < 59) {
         let sleeptime = (starttime - nowtime) * 1000;
         console.log(`等待时间 ${sleeptime / 1000}\n`);
@@ -116,7 +120,7 @@ async function cfd() {
       await $.wait(2000)
     }
 
-    const beginInfo = await getUserInfo(false);
+    const beginInfo = await getUserInfo()
     if (beginInfo.Fund.ddwFundTargTm === 0) {
       console.log(`还未开通活动，请先开通\n`)
       return
@@ -124,29 +128,27 @@ async function cfd() {
 
     console.log(`获取提现资格`)
     await cashOutQuali()
-    console.log(`提现`)
-    console.log(`提现金额：按库存轮询提现，0点场提1元以上，12点场提0.5元以上，12点后不做限制\n`)
-    await userCashOutState()
 
     await showMsg()
-
   } catch (e) {
     $.logErr(e)
   }
 }
 
 // 提现
-function cashOutQuali() {
-  return new Promise((resolve) => {
-    $.get(taskUrl(`user/CashOutQuali`, `strPgUUNum=${token['farm_jstoken']}&strPgtimestamp=${token['timestamp']}&strPhoneID=${token['phoneid']}`), (err, resp, data) => {
+async function cashOutQuali() {
+  return new Promise(async (resolve) => {
+    $.get(taskUrl(`user/CashOutQuali`, `strPgUUNum=${token['farm_jstoken']}&strPgtimestamp=${token['timestamp']}&strPhoneID=${token['phoneid']}`), async (err, resp, data) => {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)
           console.log(`${$.name} CashOutQuali API请求失败，请检查网路重试`)
         } else {
-          data = JSON.parse(data);
-          if (data.iRet === 0) {
-            console.log(`获取提现资格成功\n`)
+          data = JSON.parse(data)
+          if (data.iRet === 0 || data.iRet === 2034) {
+            console.log(`获取提现资格：${data.sErrMsg}\n`)
+            console.log(`提现\n提现金额：按库存轮询提现，0点场提1元以上，12点场提0.5元以上，12点后不做限制\n`)
+            await userCashOutState()
           } else {
             console.log(`获取提现资格失败：${data.sErrMsg}\n`)
           }
@@ -186,6 +188,7 @@ async function userCashOutState(type = true) {
                       console.log(`提现成功：获得${$.money}元`)
                       break
                     } else {
+                      console.log(`提现失败：${cashOutRes.sErrMsg}`)
                       await userCashOutState()
                     }
                   } else {
@@ -198,7 +201,7 @@ async function userCashOutState(type = true) {
                 for(let key of Object.keys($.info.buildInfo.buildList)) {
                   let vo = $.info.buildInfo.buildList[key]
                   let body = `strBuildIndex=${vo.strBuildIndex}`
-                  let getBuildInfoRes = await getBuildInfo(body, vo)
+                  let getBuildInfoRes = await getBuildInfo(body)
                   let buildNmae;
                   switch(vo.strBuildIndex) {
                     case 'food':
@@ -221,7 +224,7 @@ async function userCashOutState(type = true) {
                   if(getBuildInfoRes.dwCanLvlUp > 0 && $.info.ddwCoinBalance >= getBuildInfoRes.ddwNextLvlCostCoin) {
                     console.log(`【${buildNmae}】满足升级条件，开始升级`)
                     const body = `ddwCostCoin=${getBuildInfoRes.ddwNextLvlCostCoin}&strBuildIndex=${getBuildInfoRes.strBuildIndex}`
-                    let buildLvlUpRes = await buildLvlUp(body)
+                    var buildLvlUpRes = await buildLvlUp(body)
                     if (buildLvlUpRes.iRet === 0) {
                       console.log(`【${buildNmae}】升级成功：获得${getBuildInfoRes.ddwLvlRich}财富\n`)
                       break
@@ -232,8 +235,7 @@ async function userCashOutState(type = true) {
                     console.log(`【${buildNmae}】不满足升级条件，跳过升级\n`)
                   }
                 }
-                let userCashOutStateRes = await userCashOutState(false)
-                if (userCashOutStateRes.ddwUsrTodayGetRich >= userCashOutStateRes.ddwTodayTargetUnLockRich) {
+                if (buildLvlUpRes.iRet === 0) {
                   await userCashOutState()
                 } else {
                   console.log(`今日还未赚够${userCashOutStateRes.ddwTodayTargetUnLockRich}财富，无法提现`)
@@ -310,7 +312,7 @@ function buildLvlUp(body) {
 }
 
 // 获取用户信息
-function getUserInfo(showInvite = true) {
+function getUserInfo() {
   return new Promise(async (resolve) => {
     $.get(taskUrl(`user/QueryUserInfo`, `strPgUUNum=${token['farm_jstoken']}&strPgtimestamp=${token['timestamp']}&strPhoneID=${token['phoneid']}`), (err, resp, data) => {
       try {
@@ -321,40 +323,19 @@ function getUserInfo(showInvite = true) {
           data = JSON.parse(data);
           const {
             buildInfo = {},
-            ddwRichBalance,
             ddwCoinBalance,
-            sErrMsg,
-            strMyShareId,
-            dwLandLvl,
-            Fund = {},
-            StoryInfo = {}
+            Fund = {}
           } = data;
-          if (showInvite) {
-            console.log(`\n获取用户信息：${sErrMsg}\n${$.showLog ? data : ""}`);
-            console.log(`\n当前等级:${dwLandLvl},金币:${ddwCoinBalance},财富值:${ddwRichBalance}\n`)
-          }
-          if (showInvite && strMyShareId) {
-            console.log(`财富岛好友互助码每次运行都变化,旧的可继续使用`);
-            console.log(`\n【京东账号${$.index}（${$.UserName}）的${$.name}好友互助码】${strMyShareId}\n\n`);
-            $.shareCodes.push(strMyShareId)
-          }
           $.info = {
             ...$.info,
             buildInfo,
-            ddwRichBalance,
             ddwCoinBalance,
-            strMyShareId,
-            dwLandLvl,
-            Fund,
-            StoryInfo
+            Fund
           };
           resolve({
             buildInfo,
-            ddwRichBalance,
             ddwCoinBalance,
-            strMyShareId,
-            Fund,
-            StoryInfo
+            Fund
           });
         }
       } catch (e) {
