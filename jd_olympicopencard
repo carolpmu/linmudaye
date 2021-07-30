@@ -11,17 +11,17 @@ https://lzdz1-isv.isvjcloud.com/dingzhi/personal/care/activity/6685289?activityI
 ============Quantumultx===============
 [task_local]
 #奥运夺金牌开卡
-30 0,22 * * * jd_olympic_opencard, tag=奥运夺金牌开卡, img-url=https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_olympic_opencard.png, enabled=true
+30 0,22 * * * jd_olympic_opencard, tag=奥运夺金牌开卡, img-url=https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_olympicopencard.png, enabled=true
 
 ================Loon==============
 [Script]
 cron "30 0,22 * * *" script-path=jd_olympic_opencard,tag=奥运夺金牌开卡
 
 ===============Surge=================
-奥运夺金牌开卡 = type=cron,cronexp="30 0,22 * * *",wake-system=1,timeout=3600,script-path=jd_olympic_opencard
+奥运夺金牌开卡 = type=cron,cronexp="30 0,22 * * *",wake-system=1,timeout=3600,script-path=jdolympic_opencard
 
 ============小火箭=========
-奥运夺金牌开卡 = type=cron,script-path=jd_olympic_opencard, cronexpr="30 0,22 * * *", timeout=3600, enable=true
+奥运夺金牌开卡 = type=cron,script-path=jd_olympicopencard, cronexpr="30 0,22 * * *", timeout=3600, enable=true
 */
 const $ = new Env('奥运夺金牌开卡');
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
