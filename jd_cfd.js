@@ -3,17 +3,21 @@
 cron 5 * * * * jd_cfd.js
 更新时间：2021-7-13
 活动入口：京喜APP-我的-京喜财富岛
+
 已支持IOS双京东账号,Node.js支持N个京东账号
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 ============Quantumultx===============
 [task_local]
 #京喜财富岛
 5 * * * * https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_cfd.js, tag=京喜财富岛, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jxcfd.png, enabled=true
+
 ================Loon==============
 [Script]
 cron "5 * * * *" script-path=https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_cfd.js,tag=京喜财富岛
+
 ===============Surge=================
 京喜财富岛 = type=cron,cronexp="5 * * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_cfd.js
+
 ============小火箭=========
 京喜财富岛 = type=cron,script-path=https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_cfd.js, cronexpr="5 * * * *", timeout=3600, enable=true
  */
@@ -95,8 +99,8 @@ $.appId = 10028;
       for (let id of $.shareCodes) {
         console.log(`账号${$.UserName} 去助力 ${id}`)
         await helpByStage(id)
-        if (!$.canHelp) break
         await $.wait(3000)
+        if (!$.canHelp) break
       }
     }
     if (!$.canHelp) continue
@@ -105,8 +109,8 @@ $.appId = 10028;
       for (let id of $.strMyShareIds) {
         console.log(`账号${$.UserName} 去助力 ${id}`)
         await helpByStage(id)
-        if (!$.canHelp) break
         await $.wait(3000)
+        if (!$.canHelp) break
       }
     }
   }
@@ -1608,9 +1612,9 @@ function requireConfig() {
 function TotalBean() {
   return new Promise(async resolve => {
     const options = {
-      url: "https://wq.jd.com/user_new/info/GetJDUserInfoUnion?sceneval=2",
+      url: "https://me-api.jd.com/user_new/info/GetJDUserInfoUnion",
       headers: {
-        Host: "wq.jd.com",
+        Host: "me-api.jd.com",
         Accept: "*/*",
         Connection: "keep-alive",
         Cookie: cookie,
@@ -1627,11 +1631,11 @@ function TotalBean() {
         } else {
           if (data) {
             data = JSON.parse(data);
-            if (data['retcode'] === 1001) {
+            if (data['retcode'] === "1001") {
               $.isLogin = false; //cookie过期
               return;
             }
-            if (data['retcode'] === 0 && data.data && data.data.hasOwnProperty("userInfo")) {
+            if (data['retcode'] === "0" && data.data && data.data.hasOwnProperty("userInfo")) {
               $.nickName = data.data.userInfo.baseInfo.nickname;
             }
           } else {
