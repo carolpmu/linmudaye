@@ -58,7 +58,7 @@ if (!$.isNode() || !process.env.JD_OPENCARD_EAT_OPEN_OPENCARD) {
     $.log(`请设置env变量 JD_OPENCARD_EAT_OPEN_OPENCARD    填写11就是跑到11个ck就停止  填写21就是跑到21个ck就停止 一天最多助力20个ck 推荐10的倍数 +1 填写！！`)
     $.log(`请设置env变量 JD_OPENCARD_EAT_OPEN_OPENCARD    填写11就是跑到11个ck就停止  填写21就是跑到21个ck就停止 一天最多助力20个ck 推荐10的倍数 +1 填写！！`)
     $.log(`请设置env变量 JD_OPENCARD_EAT_OPEN_OPENCARD    填写11就是跑到11个ck就停止  填写21就是跑到21个ck就停止 一天最多助力20个ck 推荐10的倍数 +1 填写！！`)
-    jd_opencard_eat_open_opencard = 11
+    jd_opencard_eat_open_opencard = 22
 } else {
     jd_opencard_eat_open_opencard = Number(process.env.JD_OPENCARD_EAT_OPEN_OPENCARD)
     $.log(`你设置了JD_OPENCARD_EAT_OPEN_OPENCARD变量 运行到 ${jd_opencard_eat_open_opencard} ck停止`)
@@ -71,7 +71,7 @@ if (!$.isNode() || !process.env.JD_OPENCARD_EAT_OPEN_OPENCARD) {
         });
         return;
     }
-    $.shareUuid = ''
+    $.shareUuid = 'c2296e036cd74fd5bd47932a8ec716cd'
     for (let i = 0; i < cookiesArr.length; i++) {
         cookie = cookiesArr[i];
         if (cookie) {
