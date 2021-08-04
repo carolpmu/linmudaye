@@ -61,7 +61,7 @@ if (!$.isNode() || !process.env.JD_OPENCARD_COOL_SUMMER) {
         });
         return;
     }
-    $.shareUuid = ''
+    $.shareUuid = 'fa1a18fe9249434f91e53f7addd7e0c2'
     for (let i = 0; i < cookiesArr.length; i++) {
         await $.wait(2000)
         cookie = cookiesArr[i];
