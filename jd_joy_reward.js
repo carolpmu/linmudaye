@@ -116,13 +116,13 @@ async function joyReward() {
         let saleInfoId = '', giftValue = '', extInfo = '', leftStock = 0, salePrice = 0;
         let rewardNum = 500;
         if ($.isNode() && process.env.JD_JOY_REWARD_NAME) {
-          rewardNum = process.env.JD_JOY_REWARD_NAME * 1;
+          rewardNum = process.env.JD_JOY_REWARD_NAME * 500;
         } else if ($.getdata('joyRewardName')) {
-          if ($.getdata('joyRewardName') * 1 === 1) {
+          if ($.getdata('joyRewardName') * 1 === 500) {
             //兼容之前的BoxJs设置
             rewardNum = 500;
           } else {
-            rewardNum = $.getdata('joyRewardName') * 1;
+            rewardNum = $.getdata('joyRewardName') * 500;
           }
         } else {
           rewardNum = joyRewardName;
