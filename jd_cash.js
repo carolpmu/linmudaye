@@ -33,14 +33,14 @@ let jdNotify = true;//是否关闭通知，false打开通知推送，true关闭�
 let cookiesArr = [], cookie = '', message;
 let helpAuthor = true;
 const randomCount = $.isNode() ? 20 : 5;
-let cashinviteCode = 'eU9Yau3mNP5w9jyDynAV3w';
-let cashinviteCode2 = 'eU9YN4vrAa9YihCqqy10';
-let cashinviteCode3 = 'eU9YabrjZvR082rQzHEbhA';
-let cashinviteCode4 = 'Y1syb-y0';
-let cashinviteCode5 = 'eU9Ya-qxYfQmpGjVnSYbhA';
-let cashinviteCode6 = '';
-let cashinviteCode7 = '';
-let cashinviteCode8 = '';
+let cashinviteCode = 'eU9YM57MALRVpCiqoSlW';
+let cashinviteCode2 = 'eU9YFpn6FLxEqTmBoSxp';
+let cashinviteCode3 = 'eU9Ya-SzM6gu9m3WmCBG0g';
+let cashinviteCode4 = '9bWQulkXsnSg';
+let cashinviteCode5 = 'eU9YabrjZvR082rQzHEbhA';
+let cashinviteCode6 = 'Kxg-a-qwZf8jnjM';
+let cashinviteCode7 = 'eU9YaL7kM_kg-GzdnnUb3w';
+let cashinviteCode8 = 'eU9Yau3mNP5w9jyDynAV3w';
 let cashinviteCode9 = '';
 let cashinviteCode10 = '';
 if (process.env.cashinviteCode) {
