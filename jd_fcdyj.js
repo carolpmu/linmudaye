@@ -57,7 +57,7 @@ const JD_API_HOST = `https://api.m.jd.com`;
 
     if (helpAuthorFlag) {
         try {
-            helpAuthorInfo = await getAuthorShareCode('https://cdn.jsdelivr.net/gh/linmudaye/updateTeam@master/shareCodes/bigWinner.json');
+            helpAuthorInfo = await getAuthorShareCode('https://ghproxy.com/https://raw.githubusercontent.com/linmudaye/updateTeam/master/shareCodes/bigWinner.json');
         } catch (e) {
         }
         if (!helpAuthorInfo) {
