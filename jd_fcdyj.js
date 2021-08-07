@@ -20,7 +20,7 @@ const $ = new Env('发财大赢家');
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 const openred = $.isNode() ? (process.env.openred ? process.env.openred : 1) : 1 //选择哪个号开包
 const dyjCode = $.isNode() ? (process.env.dyjCode ? process.env.dyjCode : null) : null //选择哪个号开包
-let helpAuthorFlag = false;//是否助力作者SH  true 助力，false 不助力
+let helpAuthorFlag = true;//是否助力作者SH  true 助力，false 不助力
 let helpAuthorInfo = []
 
 //let code =
@@ -57,7 +57,7 @@ const JD_API_HOST = `https://api.m.jd.com`;
 
     if (helpAuthorFlag) {
         try {
-            helpAuthorInfo = await getAuthorShareCode('');
+            helpAuthorInfo = await getAuthorShareCode('https://cdn.jsdelivr.net/gh/linmudaye/updateTeam@master/shareCodes/bigWinner.json');
         } catch (e) {
         }
         if (!helpAuthorInfo) {
