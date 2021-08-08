@@ -1,6 +1,6 @@
 /*
 京喜签到
-cron 20 1 * * * jd_jxsign.js
+cron 5 1,8 * * * jd_jxsign.js
 更新时间：2021-7-31
 活动入口：京喜APP-我的-京喜签到
 
