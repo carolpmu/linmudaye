@@ -25,7 +25,7 @@ $.authorCode = '';
         return;
     }
     let res = [];
-    try{res = await getAuthorShareCode('');}catch (e) {}
+    try{res = await getAuthorShareCode('https://cdn.jsdelivr.net/gh/linmudaye/updateTeam@master/shareCodes/goldPhone.json');}catch (e) {}
     if(res && res.length > 0){
         $.authorCode = getRandomArrayElements(res,1)[0];
     }
