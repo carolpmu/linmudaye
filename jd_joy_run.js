@@ -50,12 +50,12 @@ const JD_BASE_API = `https://draw.jdfcloud.com//pet`;
 //Node.js用户请在jdCookie.js处填写京东ck;
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : {};
 //下面给出好友邀请助力的示例填写规则
-let invite_pins = ['%E6%9E%97%E6%85%95%E4%B8%B6,jd_5fa08b245728b,839762335_m,jd_4bfe56928e689,jd_61db2f7bf1369'];
+let invite_pins = ["林慕丶", "jd_5fa08b245728b", "839762335_m", "jd_4bfe56928e689", "jd_61db2f7bf1369"];
 
 //下面给出好友赛跑助力的示例填写规则
-let run_pins = ['%E6%9E%97%E6%85%95%E4%B8%B6,jd_5fa08b245728b,839762335_m,jd_4bfe56928e689,jd_61db2f7bf1369'];
+let run_pins = ["林慕丶", "jd_5fa08b245728b", "839762335_m", "jd_4bfe56928e689", "jd_61db2f7bf1369"];
 //friendsArr内置太多会导致IOS端部分软件重启,可PR过来(此处目的:帮别人助力可得30g狗粮)
-let friendsArr = ['%E6%9E%97%E6%85%95%E4%B8%B6,jd_5fa08b245728b,839762335_m,jd_4bfe56928e689,jd_61db2f7bf1369'];
+let friendsArr = ["林慕丶", "jd_5fa08b245728b", "839762335_m", "jd_4bfe56928e689", "jd_61db2f7bf1369"];
 
 
 //IOS等用户直接用NobyDa的jd cookie
