@@ -11,11 +11,14 @@ IOS用户支持京东双账号,NodeJs用户支持N个京东账号
 [task_local]
 #宠汪汪偷好友积分与狗粮
 10 0-21/3 * * * jd_joy_steal.js, tag=宠汪汪偷好友积分与狗粮, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jdcww.png, enabled=true
+
 =======Loon========
 [Script]
 cron "10 0-21/3 * * *" script-path=jd_joy_steal.js,tag=宠汪汪偷好友积分与狗粮
+
 ========Surge==========
 宠汪汪偷好友积分与狗粮 = type=cron,cronexp="10 0-21/3 * * *",wake-system=1,timeout=3600,script-path=jd_joy_steal.js
+
 =======小火箭=====
 宠汪汪偷好友积分与狗粮 = type=cron,script-path=jd_joy_steal.js, cronexpr="10 0-21/3 * * *", timeout=3600, enable=true
 */
@@ -114,7 +117,6 @@ async function jdJoySteal() {
     await getFriends();//查询是否有好友
     await $.wait(2000)
     await getCoinChanges();//查询喂食好友和偷好友积分是否已达上限
-    await $.wait(2000)
     if ($.getFriendsData && $.getFriendsData.success) {
       if (!$.getFriendsData.datas) {
         console.log(`\n京东返回宠汪汪好友列表数据为空\n`)
@@ -133,10 +135,8 @@ async function jdJoySteal() {
           }
           console.log(`偷好友积分 开始查询第${i}页好友\n`);
           await getFriends(i);
-          await $.wait(2000)
           $.allFriends = $.getFriendsData.datas;
           if ($.allFriends) await stealFriendCoinFun();
-          await $.wait(2000)
         }
         for (let i = 1; i <= new Array(lastPage).fill('').length; i++) {
           if ($.stealStatus === 'chance_full') {
@@ -164,10 +164,8 @@ async function jdJoySteal() {
           }
           console.log(`偷好友狗粮 开始查询第${i}页好友\n`);
           await getFriends(i);
-          await $.wait(2000)
           $.allFriends = $.getFriendsData.datas;
           if ($.allFriends) await stealFriendsFood();
-          await $.wait(2000)
         }
         for (let i = 1; i <= new Array(lastPage).fill('').length; i++) {
           if ($.help_feed >= 200 || ($.helpFeedStatus && $.helpFeedStatus === 'chance_full')) {
@@ -186,10 +184,8 @@ async function jdJoySteal() {
           }
           console.log(`帮好友喂食 开始查询第${i}页好友\n`);
           await getFriends(i);
-          await $.wait(2000)
           $.allFriends = $.getFriendsData.datas;
           if ($.allFriends) await helpFriendsFeed();
-          await $.wait(2000)
         }
       }
     } else {
@@ -211,11 +207,8 @@ async function stealFriendsFood() {
       //偷好友狗粮
       console.log(`发现好友【${friendPin}】可偷狗粮\n`)
       await enterFriendRoom(friendPin);
-      await $.wait(2000)
       await doubleRandomFood(friendPin);
-      await $.wait(2000)
       const getRandomFoodRes = await getRandomFood(friendPin);
-      await $.wait(2000)
       console.log(`偷好友狗粮结果：${JSON.stringify(getRandomFoodRes)}`)
       if (getRandomFoodRes && getRandomFoodRes.success) {
         if (getRandomFoodRes.errorCode === 'steal_ok') {
@@ -240,7 +233,6 @@ async function stealFriendCoinFun() {
         const { friendPin } = friends;
         if (friendPin === $.UserName) continue
         await stealFriendCoin(friendPin);//领好友积分
-        await $.wait(2000)
         if ($.stealFriendCoin * 1 === 100) {
           console.log(`偷好友积分已达上限${$.stealFriendCoin}个，现跳出循环`)
           break
@@ -262,7 +254,6 @@ async function helpFriendsFeed() {
         console.log(`\nhelpFriendsFeed---好友【${friendPin}】--喂食状态：${status}`);
         if (status === 'not_feed') {
           const helpFeedRes = await helpFeed(friendPin);
-          await $.wait(2000)
           // console.log(`帮忙喂食结果--${JSON.stringify(helpFeedRes)}`)
           $.helpFeedStatus = helpFeedRes.errorCode;
           if (helpFeedRes && helpFeedRes.errorCode === 'help_ok' && helpFeedRes.success) {
@@ -373,14 +364,12 @@ function getFriends(currentPage = '1') {
 async function stealFriendCoin(friendPin) {
   // console.log(`进入好友 ${friendPin}的房间`)
   const enterFriendRoomRes = await enterFriendRoom(friendPin);
-  await $.wait(2000)
   if (enterFriendRoomRes) {
     const { friendHomeCoin } =  enterFriendRoomRes.data;
     if (friendHomeCoin > 0) {
       //领取好友积分
       console.log(`好友 ${friendPin}的房间可领取积分${friendHomeCoin}个\n`)
       const getFriendCoinRes = await getFriendCoin(friendPin);
-      await $.wait(2000)
       console.log(`偷好友积分结果：${JSON.stringify(getFriendCoinRes)}\n`)
       if (getFriendCoinRes && getFriendCoinRes.errorCode === 'coin_took_ok') {
         $.stealFriendCoin += getFriendCoinRes.data;
