@@ -2,28 +2,22 @@
 京东手机狂欢城活动
 活动时间: 2021-8-9至2021-8-28
 活动入口：暂无 [活动地址](https://carnivalcity.m.jd.com)
-
 往期奖励：
 a、第1名可获得实物手机一部
 b、 每日第2-10000名，可获得50个京豆
 c、 每日第10001-30000名可获得20个京豆
-
-
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 ===================quantumultx================
 [task_local]
 #京东手机狂欢城
-0 0-18/6 * * * jd_carnivalcity.js, tag=京东手机狂欢城, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
-
+0 0-18/6 * * * gua_carnivalcity.js, tag=京东手机狂欢城, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
 =====================Loon================
 [Script]
-cron "0 0-18/6 * * *" script-path=jd_carnivalcity.js, tag=京东手机狂欢城
-
+cron "0 0-18/6 * * *" script-path=gua_carnivalcity.js, tag=京东手机狂欢城
 ====================Surge================
-京东手机狂欢城 = type=cron,cronexp=0 0-18/6 * * *,wake-system=1,timeout=3600,script-path=jd_carnivalcity.js
-
+京东手机狂欢城 = type=cron,cronexp=0 0-18/6 * * *,wake-system=1,timeout=3600,script-path=gua_carnivalcity.js
 ============小火箭=========
-5G狂欢城 = type=cron,script-path=jd_carnivalcity.js, cronexpr="0 0,6,12,18 * * *", timeout=3600, enable=true
+5G狂欢城 = type=cron,script-path=gua_carnivalcity.js, cronexpr="0 0,6,12,18 * * *", timeout=3600, enable=true
 */
 const $ = new Env('京东手机狂欢城');
 const notify = $.isNode() ? require('./sendNotify') : '';
@@ -544,7 +538,9 @@ async function doHelp() {
     if (!item) continue;
     const helpRes = await toHelp(item.trim());
     if (typeof helpRes === 'object') {
-      if (helpRes.data.status === 5) {
+      if (helpRes.data.status === 6) {
+        console.log(`该助力码[${item}]助力成功`);
+      }else if (helpRes.data.status === 5) {
         console.log(`助力机会已耗尽，跳出助力`);
         break;
       }else if (helpRes.data.status === 4){
@@ -585,7 +581,7 @@ function toHelp(code = "ddd345fb-57bb-4ece-968b-7bf4c92be7cc") {
           // console.log(`助力结果:${data}`);
           data = JSON.parse(data);
           if (data && data['code'] === 200) {
-            if (data['data']['status'] === 6) console.log(`助力成功\n`)
+            // if (data['data']['status'] === 6) console.log(`助力成功\n`)
             if (data['data']['jdNums']) $.beans += data['data']['jdNums'];
           }
         }
@@ -722,7 +718,7 @@ function getListRank() {
   })
 }
 
-function updateShareCodesCDN(url = 'https://cdn.jsdelivr.net/gh/linmudaye/updateTeam@master/shareCodes/jd_cityShareCodes.json') {
+function updateShareCodesCDN(url = 'https://cdn.jsdelivr.net/gh/smiek2221/updateTeam@master/shareCodes/jd_cityShareCodes.json') {
   return new Promise(resolve => {
     $.get({url , headers:{"User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1")}, timeout: 200000}, async (err, resp, data) => {
       try {
