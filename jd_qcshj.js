@@ -8,7 +8,7 @@ cron "20 1 * * *" script-path= https://raw.githubusercontent.com/linmudaye/linmu
 ===============Surge=================
 汽车生活节 = type=cron,cronexp="20 1 * * *",wake-system=1,timeout=3600,script-path= https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_qcshj.js
 ============小火箭=========
-汽车生活节 = type=cron,script-path= https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_qcshj.js, cronexpr="20 1 * * *", timeout=3600, enable=true
+汽车生活节 = type=cron,script-path= https://raw.githubusercontent.com/Ariszy/linmudaye/linmudaye/main/jd_qcshj.js, cronexpr="20 1 * * *", timeout=3600, enable=true
 */
 const $ = new Env('汽车生活节')
 const notify = $.isNode() ?require('./sendNotify') : '';
@@ -67,7 +67,10 @@ if ($.isNode()) {
                 continue
             }
       
-      await gethelpcode()
+       await gethelpcode()
+       await getlist()
+       await Ariszy()
+       await zy()
       
    }
 for(let i = 0; i < cookiesArr.length; i++){
