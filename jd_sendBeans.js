@@ -1,12 +1,11 @@
 /*
 * 来客有礼小程序
+* 搬运不知名人士
 * cron 45 4,12 * * * jd_sendBeans.js
-* 至少需要11个ck
 * */
 const $ = new Env('送豆得豆');
 const notify = $.isNode() ? require('./sendNotify') : '';
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
-//IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [];
 if ($.isNode()) {
   Object.keys(jdCookieNode).forEach((item) => {
@@ -28,9 +27,9 @@ if ($.isNode()) {
   $.activityId = '';
   $.completeNumbers = '';
   console.log(`开始获取活动信息`);
-  for (let i = 0; i < 3 && $.activityId === ''; i++) {
+  for (let i = 0; i < cookiesArr.length && $.activityId === '' && i < 3; i++) {
     $.cookie = cookiesArr[i];
-    $.UserName = decodeURIComponent($.cookie.match(/pt_pin=([^; ]+)(?=;?)/) && $.cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1]);;
+    $.UserName = decodeURIComponent($.cookie.match(/pt_pin=(.+?);/) && $.cookie.match(/pt_pin=(.+?);/)[1]);
     $.isLogin = true;
     $.nickName = $.UserName;
     await TotalBean();
@@ -44,7 +43,7 @@ if ($.isNode()) {
     }
     await getActivityInfo();
   }
-  if ($.activityId === '') {
+  if($.activityId === ''){
     console.log(`获取活动ID失败`);
     return ;
   }
@@ -54,11 +53,11 @@ if ($.isNode()) {
   console.log(`前${openCount}个账号开始开团\n`);
   for (let i = 0; i < cookiesArr.length && i < openCount; i++) {
     $.cookie = cookiesArr[i];
-    $.UserName = decodeURIComponent($.cookie.match(/pt_pin=([^; ]+)(?=;?)/) && $.cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1]);;
+    $.UserName = decodeURIComponent($.cookie.match(/pt_pin=(.+?);/) && $.cookie.match(/pt_pin=(.+?);/)[1]);
     $.index = i + 1;
     $.isLogin = true;
-    $.nickName = '';
-    if (!$.isLoginInfo[$.UserName]) {
+    $.nickName = $.UserName;
+    if(!$.isLoginInfo[$.UserName]){
       await TotalBean();
       console.log(`\n*****开始【京东账号${$.index}】${$.nickName || $.UserName}*****\n`);
       $.isLoginInfo[$.UserName] = $.isLogin;
@@ -69,7 +68,7 @@ if ($.isNode()) {
         }
         continue;
       }
-    } else {
+    }else {
       console.log(`\n*****开始【京东账号${$.index}】${$.nickName || $.UserName}*****\n`);
     }
     await openTuan();
@@ -79,7 +78,7 @@ if ($.isNode()) {
   let ckList = getRandomArrayElements(cookiesArr,cookiesArr.length);
   for (let i = 0; i < ckList.length && $.openTuanList.length > 0; i++) {
     $.cookie = ckList[i];
-    $.UserName = decodeURIComponent($.cookie.match(/pt_pin=([^; ]+)(?=;?)/) && $.cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1]);
+    $.UserName = decodeURIComponent($.cookie.match(/pt_pin=(.+?);/) && $.cookie.match(/pt_pin=(.+?);/)[1])
     $.index = i + 1;
     $.isLogin = true;
     if(!$.isLoginInfo[$.UserName]){
@@ -96,9 +95,9 @@ if ($.isNode()) {
     await helpMain();
   }
   console.log(`\n开始领取奖励\n`);
-  for (let i = 0; i < cookiesArr.length && i < openCount; i++) {
+  for (let i = 0; i < cookiesArr.length && i < openCount && $.openTuanList.length > 0; i++) {
     $.cookie = cookiesArr[i];
-    $.UserName = decodeURIComponent($.cookie.match(/pt_pin=([^; ]+)(?=;?)/) && $.cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1]);
+    $.UserName = decodeURIComponent($.cookie.match(/pt_pin=(.+?);/) && $.cookie.match(/pt_pin=(.+?);/)[1])
     $.index = i + 1;
     $.isLogin = true;
     if(!$.isLoginInfo[$.UserName]){
@@ -121,7 +120,7 @@ async function getActivityInfo(){
   $.activityList = [];
   await getActivityList();
   if($.activityList.length === 0){
-    return;
+    return ;
   }
   for (let i = 0; i < $.activityList.length; i++) {
     if($.activityList[i].status !== 'NOT_BEGIN'){
@@ -154,7 +153,7 @@ async function getActivityList(){
         "Accept": "application/json, text/plain, */*",
         "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
         "Accept-Language": "zh-cn",
-        "Referer": "https://sendbeans.jd.com/dist/index.html",
+        "Referer": "https://sendbeans.jd.com/dist/index.html?lng=120.273690&lat=31.525514&sid=c212f63c30c4bc6abfcc7889495d2acw&un_area=12_984_3382_0",
         "Accept-Encoding": "gzip, deflate, br",
         "openId": ""
       }
@@ -162,7 +161,7 @@ async function getActivityList(){
     $.get(options, (err, resp, data) => {
       try {
         data = JSON.parse(data);
-        if (data.success) {
+        if(data.success){
           $.activityList = data.data.items;
         }else{
           console.log(JSON.stringify(data));
@@ -173,7 +172,7 @@ async function getActivityList(){
         resolve(data);
       }
     })
-  })
+  });
 }
 
 
@@ -417,9 +416,9 @@ async function getActivityDetail() {
 function TotalBean() {
   return new Promise(async resolve => {
     const options = {
-      url: "https://wq.jd.com/user_new/info/GetJDUserInfoUnion?sceneval=2",
+      url: "https://me-api.jd.com/user_new/info/GetJDUserInfoUnion",
       headers: {
-        Host: "wq.jd.com",
+        Host: "me-api.jd.com",
         Accept: "*/*",
         Connection: "keep-alive",
         Cookie: $.cookie,
@@ -436,15 +435,15 @@ function TotalBean() {
         } else {
           if (data) {
             data = JSON.parse(data);
-            if (data['retcode'] === 1001) {
+            if (data['retcode'] === "1001") {
               $.isLogin = false; //cookie过期
               return;
             }
-            if (data['retcode'] === 0 && data.data && data.data.hasOwnProperty("userInfo")) {
+            if (data['retcode'] === "0" && data.data && data.data.hasOwnProperty("userInfo")) {
               $.nickName = data.data.userInfo.baseInfo.nickname;
             }
           } else {
-            console.log('京东服务器返回空数据');
+            $.log('京东服务器返回空数据');
           }
         }
       } catch (e) {
