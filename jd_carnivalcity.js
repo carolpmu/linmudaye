@@ -2,20 +2,25 @@
 京东手机狂欢城活动
 活动时间: 2021-8-9至2021-8-28
 活动入口：21.0复制整段话 https:/J4OdHn0gIrkVLF 京东手机818狂撒海量手机，瓜分1亿京豆#AB2NvF3Nvb@达kai→亰栋{a※pp}
+
 往期奖励：
 a、第1名可获得实物手机一部
 b、 每日第2-10000名，可获得50个京豆
 c、 每日第10001-30000名可获得20个京豆
+
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 ===================quantumultx================
 [task_local]
 #京东手机狂欢城
-0 0-18/6 * * * jd_carnivalcity.js, tag=京东手机狂欢城, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
+0 0-18/6 * * * jd_818.js, tag=京东手机狂欢城, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
+
 =====================Loon================
 [Script]
 cron "0 0-18/6 * * *" script-path=jd_carnivalcity.js, tag=京东手机狂欢城
+
 ====================Surge================
 京东手机狂欢城 = type=cron,cronexp=0 0-18/6 * * *,wake-system=1,timeout=3600,script-path=jd_carnivalcity.js
+
 ============小火箭=========
 5G狂欢城 = type=cron,script-path=jd_carnivalcity.js, cronexpr="0 0,6,12,18 * * *", timeout=3600, enable=true
 */
@@ -609,7 +614,7 @@ function getHelp() {
             console.log(`\n\n${$.name}互助码每天都变化,旧的不可继续使用`);
             $.log(`【京东账号${$.index}（${$.UserName}）的${$.name}好友互助码】${data.data.shareId}\n`);
             $.temp.push(data.data.shareId);
-            submitCode(data.data.shareId);
+            submitCode(data.data.shareId, $.UserName);
           } else {
             console.log(`获取邀请码失败：${JSON.stringify(data)}`);
             if (data.code === 1002) $.blockAccount = true;
@@ -740,9 +745,9 @@ function updateShareCodesCDN(url = 'https://cdn.jsdelivr.net/gh/smiek2221/update
 }
 
 //提交互助码
-function submitCode(myInviteCode) {
+function submitCode(myInviteCode, userName) {
     return new Promise(async resolve => {
-    $.get({url: `http://www.helpu.cf/jdcodes/submit.php?code=${myInviteCode}&type=jd818`, timeout: 10000}, (err, resp, data) => {
+    $.get({url: `http://www.helpu.cf/jdcodes/submit.php?code=${myInviteCode}&type=jd818&user=${userName}`, timeout: 10000}, (err, resp, data) => {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)
