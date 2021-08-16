@@ -6,14 +6,14 @@
 ============Quantumultx===============
 [task_local]
 #送豆得豆
-45 1,12 * * * https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_sendBeans.js, tag=送豆得豆, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
+45 1,12 * * * https://raw.githubusercontent.com/main/jd_sendBeans.js, tag=送豆得豆, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
 ================Loon==============
 [Script]
-cron "45 1,12 * * *" script-path=https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_sendBeans.js,tag=送豆得豆
+cron "45 1,12 * * *" script-path=https://raw.githubusercontent.com/main/jd_sendBeans.js,tag=送豆得豆
 ===============Surge=================
-送豆得豆 = type=cron,cronexp="45 1,12 * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_sendBeans.js
+送豆得豆 = type=cron,cronexp="45 1,12 * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/main/jd_sendBeans.js
 ============小火箭=========
-送豆得豆 = type=cron,script-path=https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_sendBeans.js, cronexpr="45 1,12 * * *", timeout=3600, enable=true
+送豆得豆 = type=cron,script-path=https://raw.githubusercontent.com/main/jd_sendBeans.js, cronexpr="45 1,12 * * *", timeout=3600, enable=true
  */
 const $ = new Env('送豆得豆');
 const notify = $.isNode() ? require('./sendNotify') : '';
@@ -205,7 +205,7 @@ async function myReward(){
 async function getActivityList(){
   return new Promise((resolve) => {
     let options = {
-      "url": `https://sendbeans.jd.com/common/api/bean/activity/get/entry/list/by/channel?channelId=14&channelType=H5&sendType=0&singleActivity=false&invokeKey=qRKHmL4sna8ZOP9F`,
+      "url": `https://sendbeans.jd.com/common/api/bean/activity/get/entry/list/by/channel?channelId=14&channelType=H5&sendType=0&singleActivity=false&invokeKey=ztmFUCxcPMNyUq0P`,
       "headers": {
         "Host": "sendbeans.jd.com",
         "Origin": "https://sendbeans.jd.com",
@@ -319,7 +319,7 @@ async function rewardMain(){
 async function rewardBean(){
   return new Promise((resolve) => {
     let options = {
-      "url": `https://draw.jdfcloud.com/common/api/bean/activity/sendBean?rewardRecordId=${$.rewardRecordId}&jdChannelId=&userSource=mp&appId=wxccb5c536b0ecd1bf&invokeKey=qRKHmL4sna8ZOP9F`,
+      "url": `https://draw.jdfcloud.com/common/api/bean/activity/sendBean?rewardRecordId=${$.rewardRecordId}&jdChannelId=&userSource=mp&appId=wxccb5c536b0ecd1bf&invokeKey=ztmFUCxcPMNyUq0P`,
       "headers":  {
         'content-type' : `application/json`,
         'Connection' : `keep-alive`,
@@ -364,7 +364,7 @@ function getRandomArrayElements(arr, count) {
 async function help() {
   await new Promise((resolve) => {
     let options = {
-      "url": `https://draw.jdfcloud.com/common/api/bean/activity/participate?activityId=${$.activityId}&inviteUserPin=${encodeURIComponent($.oneTuanInfo['user'])}&invokeKey=qRKHmL4sna8ZOP9F&timestap=${Date.now()}`,
+      "url": `https://draw.jdfcloud.com/common/api/bean/activity/participate?activityId=${$.activityId}&inviteUserPin=${encodeURIComponent($.oneTuanInfo['user'])}&invokeKey=ztmFUCxcPMNyUq0P&timestap=${Date.now()}`,
       "headers":  {
         'content-type' : `application/json`,
         'Connection' : `keep-alive`,
@@ -399,7 +399,7 @@ async function help() {
 }
 
 async function invite() {
-  const url = `https://draw.jdfcloud.com/common/api/bean/activity/invite?openId=oPcgJ4_X7uCMeTgGmar-rmiWst1Y&activityId=${$.activityId}&userSource=mp&formId=123&jdChannelId=&fp=&appId=wxccb5c536b0ecd1bf&invokeKey=qRKHmL4sna8ZOP9F`;
+  const url = `https://draw.jdfcloud.com/common/api/bean/activity/invite?openId=oPcgJ4_X7uCMeTgGmar-rmiWst1Y&activityId=${$.activityId}&userSource=mp&formId=123&jdChannelId=&fp=&appId=wxccb5c536b0ecd1bf&invokeKey=ztmFUCxcPMNyUq0P`;
   const method = `POST`;
   const headers = {
     'content-type' : `application/json`,
@@ -441,7 +441,7 @@ async function invite() {
 
 
 async function getActivityDetail() {
-  const url = `https://draw.jdfcloud.com/common/api/bean/activity/detail?activityId=${$.activityId}&userOpenId=oPcgJ4_X7uCMeTgGmar-rmiWst1Y&timestap=${Date.now()}&userSource=mp&jdChannelId=&appId=wxccb5c536b0ecd1bf&invokeKey=qRKHmL4sna8ZOP9F`;
+  const url = `https://draw.jdfcloud.com/common/api/bean/activity/detail?activityId=${$.activityId}&userOpenId=oPcgJ4_X7uCMeTgGmar-rmiWst1Y&timestap=${Date.now()}&userSource=mp&jdChannelId=&appId=wxccb5c536b0ecd1bf&invokeKey=ztmFUCxcPMNyUq0P`;
   const method = `GET`;
   const headers = {
     'cookie' : $.cookie,
