@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-#cron 50 20 * * *
+# cron 50 20 * * * jd_code.sh
 ## 导入通用变量与函数
 dir_shell=/ql/shell
 . $dir_shell/share.sh
