@@ -1,10 +1,8 @@
-// @grant    require
 /* 
 cron 14 10 * * * https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_sign.js
 只支持nodejs环境
 需要安装依赖 
 npm i png-js 或者 npm i png-js -S
-
 如果 read ECONNRESET 错误 可以试试
 环境变量 JOY_HOST
 修改域名 https://jdjoy.jd.com 可以改成ip https://49.7.27.236
@@ -34,6 +32,7 @@ let signFlag = false
 let successNum = 0
 let errorNum = 0
 let JD_API_HOST = 'https://jdjoy.jd.com'
+$.invokeKey = "ztmFUCxcPMNyUq0P"
 if(process.env.JOY_HOST){
   JD_API_HOST = process.env.JOY_HOST
 }
@@ -99,6 +98,7 @@ async function signRun() {
     }else{
       errorNum++;
     }
+    await $.wait(1000)
   }
 }
 
@@ -229,7 +229,7 @@ function getEid(arr) {
 }
 
 function taskUrl(turnTableId) {
-  const url = `${JD_API_HOST}/api/turncard/channel/detail?turnTableId=${turnTableId}&invokeKey=qRKHmL4sna8ZOP9F`
+  const url = `${JD_API_HOST}/api/turncard/channel/detail?turnTableId=${turnTableId}&invokeKey=${$.invokeKey}`
   return {
     url,
     headers: {
@@ -247,7 +247,7 @@ function taskUrl(turnTableId) {
 }
 
 function tasPostkUrl(turnTableId) {
-  const url = `${JD_API_HOST}/api/turncard/channel/sign?turnTableId=${turnTableId}&fp=${fp}&eid=${eid}&invokeKey=qRKHmL4sna8ZOP9F`
+  const url = `${JD_API_HOST}/api/turncard/channel/sign?turnTableId=${turnTableId}&fp=${fp}&eid=${eid}&invokeKey=${$.invokeKey}`
   return {
     url,
     headers: {
