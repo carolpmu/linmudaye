@@ -4,7 +4,7 @@
 10 1 * * * jd_ldhwj.js, tag= 来电好物季
 ================Loon==============
 [Script]
-cron "10 3,15 * * *" script-path= jd_ldhwj.js,tag= 来电好物季
+cron "10 1 * * *" script-path= jd_ldhwj.js,tag= 来电好物季
 ===============Surge=================
 来电好物季 = type=cron,cronexp="10 1 * * *",wake-system=1,timeout=3600,script-path= jd_ldhwj.js
 ============小火箭=========
@@ -259,13 +259,10 @@ list2tokenArr.push(list2.shoppingActivityVos[i].taskToken)
        }
        
        let list6 = result.data.result.taskVos.find(item => item.taskId == 6)
-       if (list6) {
-	  for(let i = 0; i < list6.shoppingActivityVos.length; i ++){
-              listtokenArr.push(6+list6.shoppingActivityVos[i].taskToken)
-              list2tokenArr.push(list6.shoppingActivityVos[i].taskToken)
-          }
+       for(let i = 0; i < list6.shoppingActivityVos.length; i ++){
+       listtokenArr.push(6+list6.shoppingActivityVos[i].taskToken)
+list2tokenArr.push(list6.shoppingActivityVos[i].taskToken)
        }
-       
        
        let list4 = result.data.result.taskVos.find(item => item.taskId == 4)
        for(let i = 0; i < list4.shoppingActivityVos.length; i ++){
