@@ -1,9 +1,9 @@
 /*
-8.13-8.31 小米-星空大冒险 [jd_xmGame.js]
+8.13-8.31 小米-星空大冒险 [jd_xm_game.js]
 一次性脚本
-脚本默认第100个账号停止
+脚本默认第16个账号停止
 如需修改:
-gua_xmGame_stopIndex="100"
+gua_xmGame_stopIndex="16"
 
 邀请人有机会获得20京豆奖励
 但仅限每日前10名好友有机会获得京豆奖励
@@ -15,25 +15,25 @@ gua_xmGame_stopIndex="100"
 第一个账号助力作者 其他依次助力CK1
 第一个CK失效会退出脚本
 ————————————————
-入口：[8.13-8.31 小米-星空大冒险 (https://lzdz1-isv.isvjcloud.com/dingzhi/xiaomi/gameupd/activity/1272964?activityId=dz2108100000412302&shareUuid=d55f062f6f894cada915b8676b127fc6)]
+入口：[8.13-8.31 小米-星空大冒险 (https://lzdz1-isv.isvjcloud.com/dingzhi/xiaomi/gameupd/activity/1272964?activityId=dz2108100000412302&shareUuid=635b2c7e02624c0ab249ce33b9bbbab2)]
 ============Quantumultx===============
 [task_local]
 #8.13-8.31 小米-星空大冒险
-31 8,22 13-31 8 * https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_xmGame.js, tag=8.13-8.31 小米-星空大冒险, enabled=true
+31 2,9,22 13-31 8 * jd_xm_game.js, tag=8.13-8.31 小米-星空大冒险, enabled=true
 
 ================Loon==============
 [Script]
-cron "31 8,22 13-31 8 *" script-path=https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_xmGame.js,tag=8.13-8.31 小米-星空大冒险
+cron "31 2,9,22 13-31 8 *" script-path=jd_xm_game.js,tag=8.13-8.31 小米-星空大冒险
 
 ===============Surge=================
-8.13-8.31 小米-星空大冒险 = type=cron,cronexp="31 8,22 13-31 8 *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_xmGame.js
+8.13-8.31 小米-星空大冒险 = type=cron,cronexp="31 2,9,22 13-31 8 *",wake-system=1,timeout=3600,script-path=jd_xm_game.js
 
 ============小火箭=========
-8.13-8.31 小米-星空大冒险 = type=cron,script-path=https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_xmGame.js, cronexpr="31 8,22 13-31 8 *", timeout=3600, enable=true
+8.13-8.31 小米-星空大冒险 = type=cron,script-path=jd_xm_game.js, cronexpr="31 2,9,22 13-31 8 *", timeout=3600, enable=true
 */
 
 
-const $ = new Env('8.13-8.31 小米-星空大冒险');
+const $ = new Env('8.13-31 小米-星空大冒险');
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 const notify = $.isNode() ? require('./sendNotify') : '';
 //IOS等用户直接用NobyDa的jd cookie
@@ -48,7 +48,7 @@ if ($.isNode()) {
   cookiesArr = [$.getdata('CookieJD'), $.getdata('CookieJD2'), ...jsonParse($.getdata('CookiesJD') || "[]").map(item => item.cookie)].filter(item => !!item);
 }
 const JD_API_HOST = `https://api.m.jd.com/client.action`;
-let stopIndex = 100
+let stopIndex = 16
 if($.isNode()){
   if (process.env.gua_xmGame_stopIndex && process.env.gua_xmGame_stopIndex != "") {
     stopIndex = process.env.gua_xmGame_stopIndex;
