@@ -9,20 +9,20 @@ Last Modified time: 2021-06-06 21:22:37
 ==============Quantumult X==============
 [task_local]
 #宠汪汪积分兑换奖品
-0 16 * * * jd_joy_dh20.js, tag=宠汪汪积分兑换奖品, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jdcww.png, enabled=true
+59 7,15,23 * * * jd_joy_dh20.js, tag=宠汪汪积分兑换奖品, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jdcww.png, enabled=true
 
 ==============Loon==============
 [Script]
-cron "0 16 * * *" script-path=jd_joy_dh20.js,tag=宠汪汪积分兑换奖品
+cron "59 7,15,23 * * *" script-path=jd_joy_dh20.js,tag=宠汪汪积分兑换奖品
 
 ================Surge===============
-宠汪汪积分兑换奖品 = type=cron,cronexp="0 16 * * *",wake-system=1,timeout=3600,script-path=jd_joy_dh20.js
+宠汪汪积分兑换奖品 = type=cron,cronexp="59 7,15,23 * * *",wake-system=1,timeout=3600,script-path=jd_joy_dh20.js
 
 ===============小火箭==========
-宠汪汪积分兑换奖品 = type=cron,script-path=jd_joy_dh20.js, cronexpr="0 16 * * *", timeout=3600, enable=true
+宠汪汪积分兑换奖品 = type=cron,script-path=jd_joy_dh20.js, cronexpr="59 7,15,23 * * *", timeout=3600, enable=true
  */
 // prettier-ignore
-const $ = new Env('退而求其次兑换20豆');
+const $ = new Env('退而求其次兑换20');
 const zooFaker = require('./JDJRValidator_Pure');
 // $.get = zooFaker.injectToRequest2($.get.bind($));
 // $.post = zooFaker.injectToRequest2($.post.bind($));
@@ -118,8 +118,8 @@ async function joyReward() {
         // console.log(`宠物等级 ${data.level}\n`);
         let saleInfoId = '', giftValue = '', extInfo = '', leftStock = 0, salePrice = 0;
         let rewardNum = 0;
-        if ($.isNode() && process.env.JD_REWARD_NAME) {
-          rewardNum = process.env.JD_REWARD_NAME * 1;
+        if ($.isNode() && process.env.JOY_REWARD_NAME) {
+          rewardNum = process.env.JOY_REWARD_NAME * 1;
         } else if ($.getdata('joyRewardName')) {
           if ($.getdata('joyRewardName') * 1 === 1) {
             //兼容之前的BoxJs设置
@@ -221,7 +221,7 @@ async function joyReward() {
 }
 function getExchangeRewards() {
   let opt = {
-    url: "//jdjoy.jd.com/common/gift/getBeanConfigs?reqSource=h5&invokeKey=ztmFUCxcPMNyUq0P",
+    url: "//jdjoy.jd.com/common/gift/getBeanConfigs?reqSource=h5&invokeKey=RtKLB8euDo7KwsO0",
     method: "GET",
     data: {},
     credentials: "include",
@@ -229,7 +229,7 @@ function getExchangeRewards() {
   }
   return new Promise((resolve) => {
     let lkt = new Date().getTime()
-    let lks = $.md5('' + 'ztmFUCxcPMNyUq0P' + lkt).toString()
+    let lks = $.md5('' + 'RtKLB8euDo7KwsO0' + lkt).toString()
     const option = {
       url: "https:" + taroRequest(opt)['url'] + $.validate,
       headers: {
@@ -269,13 +269,13 @@ function getExchangeRewards() {
 function exchange(saleInfoId, orderSource) {
   let body = {"buyParam":{"orderSource":orderSource,"saleInfoId":saleInfoId},"deviceInfo":{}}
   let opt = {
-    "url": "//jdjoy.jd.com/common/gift/new/exchange?reqSource=h5&invokeKey=ztmFUCxcPMNyUq0P",
+    "url": "//jdjoy.jd.com/common/gift/new/exchange?reqSource=h5&invokeKey=RtKLB8euDo7KwsO0",
     "data":body,
     "credentials":"include","method":"POST","header":{"content-type":"application/json"}
   }
   return new Promise((resolve) => {
     let lkt = new Date().getTime()
-    let lks = $.md5('' + 'ztmFUCxcPMNyUq0P' + lkt).toString()
+    let lks = $.md5('' + 'RtKLB8euDo7KwsO0' + lkt).toString()
     const option = {
       url: "https:" + taroRequest(opt)['url'] + $.validate,
       body: `${JSON.stringify(body)}`,
