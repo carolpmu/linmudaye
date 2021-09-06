@@ -8,14 +8,11 @@
 [task_local]
 #京喜领88元红包
 4 2,10 * * * https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_jxlhb.js, tag=京喜领88元红包, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
-
 ==============Loon==============
 [Script]
 cron "4 2,10 * * *" script-path=https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_jxlhb.js,tag=京喜领88元红包
-
 ================Surge===============
 京喜领88元红包 = type=cron,cronexp="4 2,10 * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_jxlhb.js
-
 ===============小火箭==========
 京喜领88元红包 = type=cron,script-path=https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_jxlhb.js, cronexpr="4 2,10 * * *", timeout=3600, enable=true
  */
@@ -83,7 +80,7 @@ const BASE_URL = 'https://m.jingxi.com/cubeactive/steprewardv3'
     $.canHelp = true;
     UA = UAInfo[$.UserName]
     for (let j = 0; j < $.packetIdArr.length && $.canHelp; j++) {
-      console.log(`【${$.UserName}】去助力【${$.packetIdArr[j].userName}}】邀请码：${$.packetIdArr[j].strUserPin}`);
+      console.log(`【${$.UserName}】去助力【${$.packetIdArr[j].userName}】邀请码：${$.packetIdArr[j].strUserPin}`);
       if ($.UserName === $.packetIdArr[j].userName) {
         console.log(`助力失败：不能助力自己`)
         continue
