@@ -22,9 +22,9 @@ if ($.isNode()) {
 }
 !(async () => {
     let res = ['8e5796d8dae07f16ff81ba735863b984'];
-    try{res = await getAuthorShareCode('');}catch (e) {}
+    try{res = await getAuthorShareCode('https://raw.githubusercontent.com/linmudaye/updateTeam/master/xinxiangyin.json');}catch (e) {}
     if(!res){
-        try{res = await getAuthorShareCode('');}catch (e) {}
+        try{res = await getAuthorShareCode('https://raw.githubusercontent.com/linmudaye/updateTeam/master/xinxiangyin.json');}catch (e) {}
         if(!res){res = ['8e5796d8dae07f16ff81ba735863b984'];}
     }
     if (!cookiesArr[0]) {
