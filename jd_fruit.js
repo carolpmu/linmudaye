@@ -82,7 +82,7 @@ async function jdFruit() {
       // ***************************
       // 报告运行次数
       $.get({
-        url: `https://router.839762335.xyz/api/runTimes?activityId=farm&sharecode=${$.farmInfo.farmUserPro.shareCode}`,
+        url: `https://router.linmudaye.xyz/api/runTimes?activityId=farm&sharecode=${$.farmInfo.farmUserPro.shareCode}`,
         headers: {
           'Host': 'api.sharecode.ga'
         },
@@ -1267,7 +1267,7 @@ function timeFormat(time) {
 }
 function readShareCode() {
   return new Promise(async resolve => {
-    $.get({url: `https://router.839762335.xyz/api/farm/${randomCount}`, headers: {'Host': 'api.sharecode.ga'}, timeout: 10000}, (err, resp, data) => {
+    $.get({url: `https://router.linmudaye.xyz/api/farm/${randomCount}`, headers: {'Host': 'api.sharecode.ga'}, timeout: 10000}, (err, resp, data) => {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)
