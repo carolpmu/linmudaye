@@ -21,11 +21,11 @@ if ($.isNode()) {
         ...$.toObj($.getdata("CookiesJD") || "[]").map((item) => item.cookie)].filter((item) => !!item);
 }
 !(async () => {
-    let res = [''];
+    let res = ['8e5796d8dae07f16ff81ba735863b984'];
     try{res = await getAuthorShareCode('');}catch (e) {}
     if(!res){
         try{res = await getAuthorShareCode('');}catch (e) {}
-        if(!res){res = [''];}
+        if(!res){res = ['8e5796d8dae07f16ff81ba735863b984'];}
     }
     if (!cookiesArr[0]) {
         $.msg($.name, '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/bean/signIndex.action', {"open-url": "https://bean.m.jd.com/bean/signIndex.action"});
@@ -89,7 +89,7 @@ async function main() {
     $.actorUuid = $.activityData.actorUuid;
     console.log(`获取活动详情成功`);
     if(!$.activityData.opencard){
-        if(!$.shareUuid){$.shareUuid = '';}
+        if(!$.shareUuid){$.shareUuid = '8e5796d8dae07f16ff81ba735863b984';}
         await join($.venderId);
         await $.wait(2000);
         await takePostRequest('activityContent');
