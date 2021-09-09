@@ -1,9 +1,10 @@
 /**
-心相印店铺活动  古蜀寻宝
-注意：*******参加活动需要入会**************参加活动需要入会**************参加活动需要入会*******
-cron 12 9,15 1-30 9,10 * https://raw.githubusercontent.com/star261/jd/main/scripts/jd_xinxiangyin.js
- * */
-const $ = new Env('古蜀寻宝');
+心相印-古蜀寻宝“心”旅途
+参加活动需要入会
+cron 12 8,16 1-30 9,10 * jd_xinxiangyin.js
+账号1助力作者，其余助力账号1
+ **/
+const $ = new Env('古蜀寻宝“心”旅途');
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 const notify = $.isNode() ? require('./sendNotify') : '';
 let cookiesArr = [];
@@ -21,16 +22,14 @@ if ($.isNode()) {
         ...$.toObj($.getdata("CookiesJD") || "[]").map((item) => item.cookie)].filter((item) => !!item);
 }
 !(async () => {
-    let res = ['8e5796d8dae07f16ff81ba735863b984'];
-    try{res = await getAuthorShareCode('https://raw.githubusercontent.com/linmudaye/updateTeam/master/xinxiangyin.json');}catch (e) {}
-    if(!res){
-        try{res = await getAuthorShareCode('https://raw.githubusercontent.com/linmudaye/updateTeam/master/xinxiangyin.json');}catch (e) {}
-        if(!res){res = ['8e5796d8dae07f16ff81ba735863b984'];}
-    }
     if (!cookiesArr[0]) {
         $.msg($.name, '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/bean/signIndex.action', {"open-url": "https://bean.m.jd.com/bean/signIndex.action"});
         return;
     }
+    $.activityID = 'dz210868869301';
+    $.shareUuid = '';
+    console.log(`活动时间：2021-09-07 00:00 到 2021-10-06 23:59`);
+    console.log(`入口：\nhttps://lzdz1-isv.isvjcloud.com/dingzhi/xinxiangyin/treasure/activity/${$.activityID}?activityId=${$.activityID}&shareUuid=${$.shareUuid}`);
     for (let i = 0; i < cookiesArr.length; i++) {
         getUA();
         $.index = i + 1;
@@ -47,9 +46,6 @@ if ($.isNode()) {
             }
             continue
         }
-        $.activityID = 'dz210868869301';
-        $.shareUuid = getRandomArrayElements(res,1)[0];
-        console.log(`\n活动ID：${$.activityID}`);
         await main();
         await $.wait(1000);
     }
@@ -66,7 +62,7 @@ async function main() {
     $.lz_jdpin_token = '';
     await getToken();
     if (!$.token && $.token === ``) {console.log(`获取token失败`);return;}
-    console.log(`token:${$.token}`);
+    //console.log(`token:${$.token}`);
     await getWxCommonInfoToken();
     if(!$.LZ_TOKEN_KEY || !$.LZ_TOKEN_VALUE){
         console.log(`初始化失败`);return;
@@ -75,7 +71,7 @@ async function main() {
     $.shopId = ``;
     await takePostRequest('getSimpleActInfoVo');
     if ($.venderId === ``) {console.log(`获取venderId失败`);return;}
-    console.log(`venderId :${$.venderId}`)
+    //console.log(`venderId :${$.venderId}`)
     $.pin = '';
     await getMyPing();
     if ($.pin === ``) {$.hotFlag = true;console.log(`获取pin失败,该账号可能是黑号`);return;}
@@ -87,9 +83,10 @@ async function main() {
     await takePostRequest('activityContent');
     if (JSON.stringify($.activityData) === `{}`) {console.log(`获取活动详情失败`);return;}
     $.actorUuid = $.activityData.actorUuid;
-    console.log(`获取活动详情成功`);
+    //console.log($.activityData)
+    //console.log(`获取活动详情成功`);
     if(!$.activityData.opencard){
-        if(!$.shareUuid){$.shareUuid = '8e5796d8dae07f16ff81ba735863b984';}
+        if(!$.shareUuid || $.index == 1){$.shareUuid = 'f07894bb61a8422ab3da487b7c19d62b';}
         await join($.venderId);
         await $.wait(2000);
         await takePostRequest('activityContent');
@@ -113,6 +110,8 @@ async function main() {
         await $.wait(3000);
         time++;
     }
+    console.log(`好友${$.activityData.score}人`)
+    if ($.index == 1) {$.shareUuid = $.actorUuid;console.log(`后面的账号都会助力：${$.actorUuid}`);}
 }
 async function doTask(){
     let activeTask = $.activityData.activeTask;
@@ -236,7 +235,7 @@ function dealReturn(type, data) {
                     console.log(`啥都没有`);
                 }
             }
-            console.log(JSON.stringify(data));
+            //console.log(JSON.stringify(data));
             break;
         default:
             console.log(JSON.stringify(data));
@@ -347,7 +346,7 @@ async function getUserInfo() {
 }
 function accessLogWithAD() {
     let pageurl = `https://lzdz1-isv.isvjcloud.com/dingzhi/xinxiangyin/treasure/activity/${$.activityID}?activityId=${$.activityID}&shareUuid=${$.shareUuid}`
-    console.log(`活动地址：`+pageurl);
+    //console.log(`活动地址：`+pageurl);
     let body = `venderId=${$.venderId}&code=99&pin=${encodeURIComponent($.pin)}&activityId=${$.activityID}&pageUrl=${encodeURIComponent(pageurl)}&subType=app&adSource=null`
     let url=`https://lzdz1-isv.isvjcloud.com/common/accessLogWithAD`;
     let myRequest = getPostRequest(url, body);
