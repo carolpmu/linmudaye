@@ -27,7 +27,7 @@ if ($.isNode()) {
         return;
     }
     $.activityID = 'dz210868869301';
-    $.shareUuid = '';
+    $.shareUuid = '703a443ce1254803ab6d3a5a16601cd3';
     console.log(`活动时间：2021-09-07 00:00 到 2021-10-06 23:59`);
     console.log(`入口：\nhttps://lzdz1-isv.isvjcloud.com/dingzhi/xinxiangyin/treasure/activity/${$.activityID}?activityId=${$.activityID}&shareUuid=${$.shareUuid}`);
     for (let i = 0; i < cookiesArr.length; i++) {
@@ -86,7 +86,7 @@ async function main() {
     //console.log($.activityData)
     //console.log(`获取活动详情成功`);
     if(!$.activityData.opencard){
-        if(!$.shareUuid || $.index == 1){$.shareUuid = 'f07894bb61a8422ab3da487b7c19d62b';}
+        if(!$.shareUuid || $.index == 1){$.shareUuid = '703a443ce1254803ab6d3a5a16601cd3';}
         await join($.venderId);
         await $.wait(2000);
         await takePostRequest('activityContent');
