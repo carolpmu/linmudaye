@@ -3,7 +3,7 @@
 入口：APP首页-领京豆-升级赚京豆
 21 9 * * * jd_sjzjd.js, tag=升级赚京豆, enabled=true
 */
-const $ = new Env('MM领京豆');
+const $ = new Env('升级赚京豆');
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 const notify = $.isNode() ? require('./sendNotify') : '';
 
