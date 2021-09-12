@@ -1,9 +1,8 @@
 /*
 活动：京小鸽吾悦寄
-活动路径：首页搜索边玩边赚-》京小鸽吾悦寄
+活动路径：边玩边赚->京小鸽吾悦寄
 很小的几率能抽到实物。
-cron 8 4,11 * * * jd_jxg.js
-cron "8 4,11 * * *" jd_jxg.js
+9 1,13 1-30 9 * jd_jxg.js
 */
 const $ = new Env('京小鸽吾悦寄');
 const notify = $.isNode() ? require('./sendNotify') : '';
