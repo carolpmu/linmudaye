@@ -144,7 +144,7 @@ async function appindex(info=false) {
                   message += `当前现金：${data.data.result.totalMoney}元`;
                   allMessage += `京东账号${$.index}${$.nickName}\n${message}${$.index !== cookiesArr.length ? '\n\n' : ''}`;
                 }
-                console.log(`\n\n当前现金：${data.data.result.totalMoney}元`);
+                console.log(`\n\n【京东账号${$.index}】当前现金：${data.data.result.signMoney}元`);
                 return
               }
               $.signMoney = data.data.result.totalMoney;
