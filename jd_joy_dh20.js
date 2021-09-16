@@ -9,17 +9,17 @@ Last Modified time: 2021-06-06 21:22:37
 ==============Quantumult X==============
 [task_local]
 #宠汪汪积分兑换奖品
-59 15 * * * jd_joy_dh20.js, tag=宠汪汪积分兑换奖品, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jdcww.png, enabled=true
+59 15 * * * jd_joy_dh20.js, tag=退而求其次兑换20, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jdcww.png, enabled=true
 ==============Loon==============
 [Script]
-cron "59 15 * * *" script-path=jd_joy_dh20.js,tag=宠汪汪积分兑换奖品
+cron "59 15 * * *" script-path=jd_joy_dh20.js,tag=退而求其次兑换20
 ================Surge===============
-宠汪汪积分兑换奖品 = type=cron,cronexp="59 15 * * *",wake-system=1,timeout=3600,script-path=jd_joy_dh20.js
+退而求其次兑换20 = type=cron,cronexp="59 15 * * *",wake-system=1,timeout=3600,script-path=jd_joy_dh20.js
 ===============小火箭==========
-宠汪汪积分兑换奖品 = type=cron,script-path=jd_joy_dh20.js, cronexpr="59 15 * * *", timeout=3600, enable=true
+退而求其次兑换20 = type=cron,script-path=jd_joy_dh20.js, cronexpr="59 15 * * *", timeout=3600, enable=true
  */
 // prettier-ignore
-const $ = new Env('宠汪汪积分兑换奖品');
+const $ = new Env('退而求其次兑换20');
 const zooFaker = require('./JDJRValidator_Pure');
 // $.get = zooFaker.injectToRequest2($.get.bind($));
 // $.post = zooFaker.injectToRequest2($.post.bind($));
