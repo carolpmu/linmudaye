@@ -113,7 +113,7 @@ async function signInit() {
     $.get(taskUrl('speedSignInit', {
       "activityId": "8a8fabf3cccb417f8e691b6774938bc2",
       "kernelPlatform": "RN",
-      "inviterId":""
+      "inviterId":"a99FNTpjt1jCNsakdDrRSw=="
     }), async (err, resp, data) => {
       try {
         if (err) {
@@ -670,7 +670,9 @@ function taskGetUrl(function_id, body) {
 
 function invite2() {
   let t = +new Date()
-  let inviterId = [][Math.floor((Math.random() * 3))]
+  let inviterId = [
+    "a99FNTpjt1jCNsakdDrRSw=="
+  ][Math.floor((Math.random() * 3))]
   let headers = {
     'Host': 'api.m.jd.com',
     'accept': 'application/json, text/plain, */*',
@@ -696,7 +698,9 @@ function invite2() {
 
 function invite() {
   let t = +new Date()
-  let inviterId = [][Math.floor((Math.random() * 3))]
+  let inviterId = [
+    "a99FNTpjt1jCNsakdDrRSw=="
+  ][Math.floor((Math.random() * 3))]
   var headers = {
     'Host': 'api.m.jd.com',
     'accept': 'application/json, text/plain, */*',
