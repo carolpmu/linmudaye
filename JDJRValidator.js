@@ -1,3 +1,6 @@
+/*
+图形签到用的
+*/
 const https = require('https');
 const http = require('http');
 const stream = require('stream');
