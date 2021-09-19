@@ -8,7 +8,7 @@ update 2021/7/25
 https:\/\/api\.m.jd.com\/api\?appid=siteppM&functionId=siteppM_priceskusPull url script-request-body https://raw.githubusercontent.com/ZCY01/daily_scripts/main/jd/jd_priceProtectRewrite.js
 [task_local]
 # 京东价格保护
-5 0 * * * https://raw.githubusercontent.com/ZCY01/daily_scripts/main/jd/jd_priceProtect.js, tag=京东价格保护, img-url=https://raw.githubusercontent.com/ZCY01/img/master/pricev1.png, enabled=true
+5 0 * * * jd_price.js, tag=京东价格保护, img-url=https://raw.githubusercontent.com/ZCY01/img/master/pricev1.png, enabled=true
 ==========================Node=========================
 Node 用户安装 jsdom 即可，如缺少其他依赖自行安装
 在 scripts 目录下：npm install jsdom
