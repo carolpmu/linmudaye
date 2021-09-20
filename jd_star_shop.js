@@ -1,7 +1,7 @@
 /**
- 明星小店
+ 9.18-10.9 明星小店
  蚊子腿，欧皇可以中实物
-cron 12 19 10-17 9 * jd_star_shop.js
+cron cron 12 19 19-30 9 * jd_star_shop.js
  */
 const $ = new Env('明星小店');
 const notify = $.isNode() ? require('./sendNotify') : '';
@@ -11,10 +11,10 @@ $.authorCodeList = [];
 let cookiesArr = [];
 $.linkID = '';
 let uniqueIdList = [
-        {'id':'RU59FC','name':'尹正','linkID':'o4Z4uGy8EYe_-RY7p-Uw_Q','taskId':244},
+        {'id':'RU59FC','name':'尹正','linkID':'Q7qMuOyySR-qdWRz4YYR0w','taskId':259},
 ];
 const rewardList = [
-    'o4Z4uGy8EYe_-RY7p-Uw_Q',
+    'Q7qMuOyySR-qdWRz4YYR0w',
 ]
 if ($.isNode()) {
     Object.keys(jdCookieNode).forEach((item) => {
