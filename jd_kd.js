@@ -115,10 +115,12 @@ function userSignIn() {
   })
 }
 function taskUrl() {
+  let t = +new Date()
   return {
     url: `https://lop-proxy.jd.com/jiFenApi/signInAndGetReward`,
     body: '[{"userNo":"$cooMrdGatewayUid$"}]',
     headers: {
+      'uuid': `${t}${t * 2}`,
       'Host': 'lop-proxy.jd.com',
       'lop-dn': 'jingcai.jd.com',
       'biz-type': 'service-monitor',
@@ -127,7 +129,7 @@ function taskUrl() {
       'content-type': 'application/json;charset=utf-8',
       'clientinfo': '{"appName":"jingcai","client":"m"}',
       'accept': 'application/json, text/plain, */*',
-      'jexpress-report-time': '1607330170578',
+      'jexpress-report-time': t,
       'x-requested-with': 'XMLHttpRequest',
       'source-client': '2',
       'appparams': '{"appid":158,"ticket_type":"m"}',
@@ -137,8 +139,9 @@ function taskUrl() {
       'sec-fetch-mode': 'cors',
       'sec-fetch-dest': 'empty',
       'referer': 'https://jingcai-h5.jd.com/',
-      'accept-language': 'zh-CN,zh;q=0.9',
+      'accept-language': 'zh-CN,zh-Hans;q=0.9',
       "Cookie": cookie,
+      'app-key': 'jexpress',
       "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
     }
   }
