@@ -33,7 +33,7 @@ http-response ^https:\/\/draw\.jdfcloud\.com(\/mirror)?\/\/api\/user\/addUser\?c
 http-request ^https:\/\/draw\.jdfcloud\.com(\/mirror)?\/\/api\/user\/user\/detail\?openId= script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_joy_run.js, timeout=3600, tag=宠汪汪助力获取Token
 */
 const $ = new Env('宠汪汪赛跑');
-const zooFaker = require('./JDJRValidator_Pure');
+const zooFaker = require('./utils/JDJRValidator_Pure');
 $.get = zooFaker.injectToRequest2($.get.bind($));
 $.post = zooFaker.injectToRequest2($.post.bind($));
 //宠汪汪赛跑所需token，默认读取作者服务器的
@@ -568,7 +568,7 @@ function getRandomArrayElements(arr, count) {
 function getFriendPins() {
   return new Promise(resolve => {
     $.get({
-      url: "https://cdn.jsdelivr.net/gh/gitupdate/friendPin@main/friendPins.json",
+      url: "https://cdn.jsdelivr.net/gh/Aaron-lv/updateTeam@master/friendPins.json",
       headers:{
         "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1 Edg/87.0.4280.88"
       },
