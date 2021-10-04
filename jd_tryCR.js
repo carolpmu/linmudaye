@@ -32,7 +32,7 @@ $.sentNum = 0;
 $.cookiesArr = []
 $.innerKeyWords =
     [
-        "电信"
+        "电信卡","流量卡"
     ]
 //下面很重要，遇到问题请把下面注释看一遍再来问
 let args_xh = {
