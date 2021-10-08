@@ -671,7 +671,7 @@ function taskGetUrl(function_id, body) {
 function invite2() {
   let t = +new Date()
   let inviterId = [
-  ][Math.floor((Math.random() * 3))]
+  ][Math.floor((Math.random() * 5))]
   let headers = {
     'Host': 'api.m.jd.com',
     'accept': 'application/json, text/plain, */*',
@@ -699,7 +699,7 @@ function invite() {
   let t = +new Date()
   let inviterId = [
     ""
-  ][Math.floor((Math.random() * 3))]
+  ][Math.floor((Math.random() * 5))]
   var headers = {
     'Host': 'api.m.jd.com',
     'accept': 'application/json, text/plain, */*',
