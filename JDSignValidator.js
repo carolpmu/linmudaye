@@ -1,4 +1,196 @@
+const UA = require('../USER_AGENTS.js').USER_AGENT;
 
+const navigator = {
+  userAgent: UA,
+  plugins: { length: 0 },
+  language: "zh-CN",
+};
+const screen = {
+  availHeight: 812,
+  availWidth: 375,
+  colorDepth: 24,
+  height: 812,
+  width: 375,
+  pixelDepth: 24,
+
+}
+const window = {
+
+}
+const document = {
+  location: {
+    "ancestorOrigins": {},
+    "href": "https://prodev.m.jd.com/mall/active/3BbAVGQPDd6vTyHYjmAutXrKAos6/index.html",
+    "origin": "https://prodev.m.jd.com",
+    "protocol": "https:",
+    "host": "prodev.m.jd.com",
+    "hostname": "prodev.m.jd.com",
+    "port": "",
+    "pathname": "/mall/active/3BbAVGQPDd6vTyHYjmAutXrKAos6/index.html",
+    "search": "",
+    "hash": ""
+  }
+};
+var start_time = (new Date).getTime(),
+  _jdfp_canvas_md5 = "",
+  _jdfp_webgl_md5 = "",
+  _fingerprint_step = 1,
+  _JdEid = "",
+  _eidFlag = !1,
+  risk_jd_local_fingerprint = "",
+  _jd_e_joint_;
+
+  function t(a) {
+    if (null == a || void 0 == a || "" == a) return "NA";
+    if (null == a || void 0 == a || "" == a) var b = "";
+    else {
+      b = [];
+      for (var c = 0; c < 8 * a.length; c += 8) b[c >> 5] |= (a.charCodeAt(c / 8) & 255) << c % 32
+    }
+    a = 8 * a.length;
+    b[a >> 5] |= 128 << a % 32;
+    b[(a + 64 >>> 9 << 4) + 14] = a;
+    a = 1732584193;
+    c = -271733879;
+    for (var l = -1732584194, h = 271733878, q = 0; q < b.length; q += 16) {
+      var z = a,
+        C = c,
+        D = l,
+        B = h;
+      a = v(a, c, l, h, b[q + 0], 7, -680876936);
+      h = v(h, a, c, l, b[q + 1], 12, -389564586);
+      l = v(l, h, a, c, b[q + 2], 17, 606105819);
+      c = v(c, l, h, a, b[q + 3], 22, -1044525330);
+      a = v(a, c, l, h, b[q + 4], 7, -176418897);
+      h = v(h, a, c, l, b[q + 5], 12, 1200080426);
+      l = v(l, h, a, c, b[q + 6], 17, -1473231341);
+      c = v(c, l, h, a, b[q + 7], 22, -45705983);
+      a = v(a, c, l, h, b[q + 8], 7, 1770035416);
+      h = v(h, a, c, l, b[q + 9], 12, -1958414417);
+      l = v(l, h, a, c, b[q + 10], 17, -42063);
+      c = v(c, l, h, a, b[q + 11], 22, -1990404162);
+      a = v(a, c, l, h, b[q + 12], 7, 1804603682);
+      h = v(h, a, c, l, b[q + 13], 12, -40341101);
+      l = v(l, h, a, c, b[q + 14], 17, -1502002290);
+      c = v(c, l, h, a, b[q + 15], 22, 1236535329);
+      a = x(a, c, l, h, b[q + 1], 5, -165796510);
+      h = x(h, a, c, l, b[q + 6], 9, -1069501632);
+      l = x(l, h, a, c, b[q + 11], 14, 643717713);
+      c = x(c, l, h, a, b[q + 0], 20, -373897302);
+      a = x(a, c, l, h, b[q + 5], 5, -701558691);
+      h = x(h, a, c, l, b[q + 10], 9, 38016083);
+      l = x(l, h, a, c, b[q + 15], 14, -660478335);
+      c = x(c, l, h, a, b[q + 4], 20, -405537848);
+      a = x(a, c, l, h, b[q + 9], 5, 568446438);
+      h = x(h, a, c, l, b[q + 14], 9, -1019803690);
+      l = x(l, h, a, c, b[q + 3], 14, -187363961);
+      c = x(c, l, h, a, b[q + 8], 20, 1163531501);
+      a = x(a, c, l, h, b[q + 13], 5, -1444681467);
+      h = x(h, a, c, l, b[q + 2], 9, -51403784);
+      l = x(l, h, a, c, b[q + 7], 14, 1735328473);
+      c = x(c, l, h, a, b[q + 12], 20, -1926607734);
+      a = u(c ^ l ^ h, a, c, b[q + 5], 4, -378558);
+      h = u(a ^ c ^ l, h, a, b[q + 8], 11, -2022574463);
+      l = u(h ^ a ^ c, l, h, b[q + 11], 16, 1839030562);
+      c = u(l ^ h ^ a, c, l, b[q + 14], 23, -35309556);
+      a = u(c ^ l ^ h, a, c, b[q + 1], 4, -1530992060);
+      h = u(a ^ c ^ l, h, a, b[q + 4], 11, 1272893353);
+      l = u(h ^ a ^ c, l, h, b[q + 7], 16, -155497632);
+      c = u(l ^ h ^ a, c, l, b[q + 10], 23, -1094730640);
+      a = u(c ^ l ^ h, a, c, b[q + 13], 4, 681279174);
+      h = u(a ^ c ^ l, h, a, b[q + 0], 11, -358537222);
+      l = u(h ^ a ^ c, l, h, b[q + 3], 16, -722521979);
+      c = u(l ^ h ^ a, c, l, b[q + 6], 23, 76029189);
+      a = u(c ^ l ^ h, a, c, b[q + 9], 4, -640364487);
+      h = u(a ^ c ^ l, h, a, b[q + 12], 11, -421815835);
+      l = u(h ^ a ^ c, l, h, b[q + 15], 16, 530742520);
+      c = u(l ^ h ^ a, c, l, b[q + 2], 23, -995338651);
+      a = w(a, c, l, h, b[q + 0], 6, -198630844);
+      h = w(h, a, c, l, b[q + 7], 10, 1126891415);
+      l = w(l, h, a, c, b[q + 14], 15, -1416354905);
+      c = w(c, l, h, a, b[q + 5], 21, -57434055);
+      a = w(a, c, l, h, b[q + 12], 6, 1700485571);
+      h = w(h, a, c, l, b[q + 3], 10, -1894986606);
+      l = w(l, h, a, c, b[q + 10], 15, -1051523);
+      c = w(c, l, h, a, b[q + 1], 21, -2054922799);
+      a = w(a, c, l, h, b[q + 8], 6, 1873313359);
+      h = w(h, a, c, l, b[q + 15], 10, -30611744);
+      l = w(l, h, a, c, b[q + 6], 15, -1560198380);
+      c = w(c, l, h, a, b[q + 13], 21, 1309151649);
+      a = w(a, c, l, h, b[q + 4], 6, -145523070);
+      h = w(h, a, c, l, b[q + 11], 10, -1120210379);
+      l = w(l, h, a, c, b[q + 2], 15, 718787259);
+      c = w(c, l, h, a, b[q + 9], 21, -343485551);
+      a = A(a, z);
+      c = A(c, C);
+      l = A(l, D);
+      h = A(h, B)
+    }
+    b = [a, c, l, h];
+    a = "";
+    for (c = 0; c < 4 * b.length; c++) a += "0123456789abcdef".charAt(b[c >> 2] >> c % 4 * 8 + 4 & 15) +
+      "0123456789abcdef".charAt(b[c >> 2] >> c % 4 * 8 & 15);
+    return a
+  }
+  function u(a, b, c, l, h, q) {
+    a = A(A(b, a), A(l, q));
+    return A(a << h | a >>> 32 - h, c)
+  }
+
+  function v(a, b, c, l, h, q, z) {
+    return u(b & c | ~b & l, a, b, h, q, z)
+  }
+
+  function x(a, b, c, l, h, q, z) {
+    return u(b & l | c & ~l, a, b, h, q, z)
+  }
+
+  function w(a, b, c, l, h, q, z) {
+    return u(c ^ (b | ~l), a, b, h, q, z)
+  }
+
+  function A(a, b) {
+    var c = (a & 65535) + (b & 65535);
+    return (a >> 16) + (b >> 16) + (c >> 16) << 16 | c & 65535
+  }
+  _fingerprint_step = 2;
+  var y = "",
+    n = navigator.userAgent.toLowerCase();
+  n.indexOf("jdapp") && (n = n.substring(0, 90));
+  var e = navigator.language,
+    f = n; - 1 != f.indexOf("ipad") || -1 != f.indexOf("iphone os") || -1 != f.indexOf("midp") || -1 != f.indexOf(
+      "rv:1.2.3.4") || -1 != f.indexOf("ucweb") || -1 != f.indexOf("android") || -1 != f.indexOf("windows ce") ||
+      f.indexOf("windows mobile");
+  var r = "NA",
+    k = "NA";
+  try {
+    -1 != f.indexOf("win") && -1 != f.indexOf("95") && (r = "windows", k = "95"), -1 != f.indexOf("win") && -1 !=
+      f.indexOf("98") && (r = "windows", k = "98"), -1 != f.indexOf("win 9x") && -1 != f.indexOf("4.90") && (
+        r = "windows", k = "me"), -1 != f.indexOf("win") && -1 != f.indexOf("nt 5.0") && (r = "windows", k =
+          "2000"), -1 != f.indexOf("win") && -1 != f.indexOf("nt") && (r = "windows", k = "NT"), -1 != f.indexOf(
+            "win") && -1 != f.indexOf("nt 5.1") && (r = "windows", k = "xp"), -1 != f.indexOf("win") && -1 != f
+              .indexOf("32") && (r = "windows", k = "32"), -1 != f.indexOf("win") && -1 != f.indexOf("nt 5.1") && (r =
+                "windows", k = "7"), -1 != f.indexOf("win") && -1 != f.indexOf("6.0") && (r = "windows", k = "8"),
+      -1 == f.indexOf("win") || -1 == f.indexOf("nt 6.0") && -1 == f.indexOf("nt 6.1") || (r = "windows", k =
+        "9"), -1 != f.indexOf("win") && -1 != f.indexOf("nt 6.2") && (r = "windows", k = "10"), -1 != f.indexOf(
+          "linux") && (r = "linux"), -1 != f.indexOf("unix") && (r = "unix"), -1 != f.indexOf("sun") && -1 !=
+          f.indexOf("os") && (r = "sun os"), -1 != f.indexOf("ibm") && -1 != f.indexOf("os") && (r = "ibm os/2"),
+      -1 != f.indexOf("mac") && -1 != f.indexOf("pc") && (r = "mac"), -1 != f.indexOf("aix") && (r = "aix"),
+      -1 != f.indexOf("powerpc") && (r = "powerPC"), -1 != f.indexOf("hpux") && (r = "hpux"), -1 != f.indexOf(
+        "netbsd") && (r = "NetBSD"), -1 != f.indexOf("bsd") && (r = "BSD"), -1 != f.indexOf("osf1") && (r =
+          "OSF1"), -1 != f.indexOf("irix") && (r = "IRIX", k = ""), -1 != f.indexOf("freebsd") && (r =
+            "FreeBSD"), -1 != f.indexOf("symbianos") && (r = "SymbianOS", k = f.substring(f.indexOf(
+              "SymbianOS/") + 10, 3))
+  } catch (a) { }
+  _fingerprint_step = 3;
+  var g = "NA",
+    m = "NA";
+  try {
+    -1 != f.indexOf("msie") && (g = "ie", m = f.substring(f.indexOf("msie ") + 5), m.indexOf(";") && (m = m.substring(
+      0, m.indexOf(";")))); - 1 != f.indexOf("firefox") && (g = "Firefox", m = f.substring(f.indexOf(
+        "firefox/") + 8)); - 1 != f.indexOf("opera") && (g = "Opera", m = f.substring(f.indexOf("opera/") + 6,
+          4)); - 1 != f.indexOf("safari") && (g = "safari", m = f.substring(f.indexOf("safari/") + 7)); - 1 != f.indexOf(
+            "chrome") && (g = "chrome", m = f.substring(f.indexOf("chrome/") + 7), m.indexOf(" ") && (m = m.substring(
               0, m.indexOf(" ")))); - 1 != f.indexOf("navigator") && (g = "navigator", m = f.substring(f.indexOf(
                 "navigator/") + 10)); - 1 != f.indexOf("applewebkit") && (g = "applewebkit_chrome", m = f.substring(f.indexOf(
                   "applewebkit/") + 12), m.indexOf(" ") && (m = m.substring(0, m.indexOf(" ")))); - 1 != f.indexOf(
