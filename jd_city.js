@@ -1,7 +1,6 @@
 /*
 城城领现金
-活动时间：2021-05-25到2021-06-03
-更新时间：2021-05-24 014:55
+活动时间：2021-10-20到2021-10-30
 脚本兼容: QuantumultX, Surge,Loon, JSBox, Node.js
 =================================Quantumultx=========================
 [task_local]
@@ -20,7 +19,7 @@ const notify = $.isNode() ? require("./sendNotify") : "";
 //Node.js用户请在jdCookie.js处填写京东ck;
 const jdCookieNode = $.isNode() ? require("./jdCookie.js") : "";
 //自动抽奖 ，环境变量  JD_CITY_EXCHANGE
-let exchangeFlag = $.getdata("jdJxdExchange") || !!0; //是否开启自动抽奖，建议活动快结束开启，默认关闭
+let exchangeFlag = $.isNode() ? (process.env.JD_CITY_EXCHANGE === "true" ? true : false) : ($.getdata('jdJxdExchange') === "true" ? true : false)  //是否开启自动抽奖，建议活动快结束开启，默认关闭
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [],
   cookie = "",
@@ -55,9 +54,7 @@ const JD_API_HOST = "https://api.m.jd.com/client.action";
   if (exchangeFlag) {
     console.log(`脚本自动抽奖`);
   } else {
-    console.log(
-      `脚本不会自动抽奖，建议活动快结束开启，默认关闭(在6.2日自动开启抽奖),如需自动抽奖请设置环境变量  JD_CITY_EXCHANGE 为true`
-    );
+    console.log(`脚本不会自动抽奖，建议活动快结束开启，默认关闭(在10.29日自动开启抽奖),如需自动抽奖请设置环境变量  JD_CITY_EXCHANGE 为true`);
   }
   for (let i = 0; i < cookiesArr.length; i++) {
     if (cookiesArr[i]) {
@@ -135,7 +132,7 @@ const JD_API_HOST = "https://api.m.jd.com/client.action";
           }
         }
       } else {
-        //默认6.2开启抽奖
+        //默认10.29开启抽奖
         if (new Date().getMonth() + 1 === 10 && new Date().getDate() >= 29) {
           const res = await city_lotteryAward(); //抽奖
           if (res && res > 0) {
