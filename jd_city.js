@@ -25,7 +25,7 @@ let exchangeFlag = $.getdata("jdJxdExchange") || !!0; //是否开启自动抽奖
 let cookiesArr = [],
   cookie = "",
   message;
-let inviteCodes = ["yitCHlkBlYIlMs_WF5h_mhc-p5VRIOioANt4RbK-@RtGKzbr1QQLxfIefENY7hPWKMIk9aQgOCudrGIBe3OSNjcCK3w@RtGKzL7yFA-ld4GSQtI736bB9rWQqTZoDHcGlbZe50u3lw2Obw"];
+let inviteCodes = ["yitCHlkBlYIlMs_WF5h_mhc-p5VRIOioANt4RbK-@RtGKzbr1QQLxfIefENY7hPWKMIk9aQgOCudrGIBe3OSNjcCK3w@RtGKzL7yFA-ld4GSQtI736bB9rWQqTZoDHcGlbZe50u3lw2Obw@RtGKzu3wEwj1edHMFtc13y_i5txsA0vFaeop9zDlgOjW6Byd8w"];
 if ($.isNode()) {
   Object.keys(jdCookieNode).forEach((item) => {
     cookiesArr.push(jdCookieNode[item]);
