@@ -1,7 +1,7 @@
 /*
 京喜领88元红包
 活动入口：京喜app-》我的-》京喜领88元红包
-助力逻辑：自己账号内部互助
+助力逻辑：先自己京东账号相互助力，如有剩余助力机会，则助力作者
 温馨提示：如提示助力火爆，可尝试寻找京东客服
 脚本兼容: Quantumult X, Surge, Loon, JSBox, Node.js
 ==============Quantumult X==============
@@ -39,13 +39,13 @@ const BASE_URL = 'https://m.jingxi.com/cubeactive/steprewardv3'
   }
   console.log('京喜领88元红包\n' +
       '活动入口：京喜app-》我的-》京喜领88元红包\n' +
-      '助力逻辑：自己账号内部互助\n' +
+      '助力逻辑：先自己京东账号相互助力，如有剩余助力机会，则助力作者\n' +
       '温馨提示：如提示助力火爆，可尝试寻找京东客服')
   let res = await getAuthorShareCode('https://raw.githubusercontent.com/linmudaye/updateTeam/master/shareCodes/jxhb.json')
   if (!res) {
-    //$.http.get({url: ''}).then((resp) => {}).catch((e) => $.log('刷新CDN异常', e));
+    $.http.get({url: 'https://purge.jsdelivr.net/gh/linmudaye/updateTeam@master/shareCodes/jxhb.json'}).then((resp) => {}).catch((e) => $.log('刷新CDN异常', e));
     await $.wait(1000)
-    res = await getAuthorShareCode('')
+    res = await getAuthorShareCode('https://cdn.jsdelivr.net/gh/linmudaye/updateTeam@master/shareCodes/jxhb.json')
   }
   if (res && res.activeId) $.activeId = res.activeId;
   $.authorMyShareIds = [...((res && res.codes) || [])];
@@ -69,11 +69,11 @@ const BASE_URL = 'https://m.jingxi.com/cubeactive/steprewardv3'
       continue
     }
     token = await getJxToken()
-    await main();    
+    await main();
   }
   //互助
   console.log(`\n\n自己京东账号助力码：\n${JSON.stringify($.packetIdArr)}\n\n`);
-  console.log(`\n开始助力：助力逻辑 自己账号内部互助\n`)
+  console.log(`\n开始助力：助力逻辑 先自己京东相互助力，如有剩余助力机会，则助力作者\n`)
   for (let i = 0; i < cookiesArr.length; i++) {
     cookie = cookiesArr[i];
     $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1]);
@@ -81,7 +81,7 @@ const BASE_URL = 'https://m.jingxi.com/cubeactive/steprewardv3'
     UA = UAInfo[$.UserName]
     token = await getJxToken()
     for (let j = 0; j < $.packetIdArr.length && $.canHelp; j++) {
-      console.log(`【${$.UserName}】去助力【${$.packetIdArr[j].userName}}】邀请码：${$.packetIdArr[j].strUserPin}`);
+      console.log(`【${$.UserName}】去助力【${$.packetIdArr[j].userName}】邀请码：${$.packetIdArr[j].strUserPin}`);
       if ($.UserName === $.packetIdArr[j].userName) {
         console.log(`助力失败：不能助力自己`)
         continue
@@ -96,15 +96,15 @@ const BASE_URL = 'https://m.jingxi.com/cubeactive/steprewardv3'
       }
     }
     if ($.canHelp && ($.authorMyShareIds && $.authorMyShareIds.length)) {
-      //console.log(`\n【${$.UserName}】有剩余助力机会，开始助力作者\n`)
+      console.log(`\n【${$.UserName}】有剩余助力机会，开始助力作者\n`)
       for (let j = 0; j < $.authorMyShareIds.length && $.canHelp; j++) {
-        //console.log(`【${$.UserName}】去助力作者的邀请码：${$.authorMyShareIds[j]}`);
+        console.log(`【${$.UserName}】去助力作者的邀请码：${$.authorMyShareIds[j]}`);
         $.max = false;
-        //await enrollFriend($.authorMyShareIds[j]);
+        await enrollFriend($.authorMyShareIds[j]);
         await $.wait(5000);
         if ($.max) {
-          //$.authorMyShareIds.splice(j, 1)
-          //j--
+          $.authorMyShareIds.splice(j, 1)
+          j--
           continue
         }
       }
@@ -279,7 +279,7 @@ function openRedPack(strPin, grade) {
 }
 
 function getAuthorShareCode(url) {
-  return new Promise(resolve => {
+  return new Promise(async resolve => {
     const options = {
       url: `${url}?${new Date()}`, "timeout": 10000, headers: {
         "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1 Edg/87.0.4280.88"
@@ -299,16 +299,15 @@ function getAuthorShareCode(url) {
     }
     $.get(options, async (err, resp, data) => {
       try {
-        if (err) {
-        } else {
-          if (data) data = JSON.parse(data)
-        }
+        resolve(JSON.parse(data))
       } catch (e) {
         // $.logErr(e, resp)
       } finally {
-        resolve(data);
+        resolve();
       }
     })
+    await $.wait(10000)
+    resolve();
   })
 }
 
