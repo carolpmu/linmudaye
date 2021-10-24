@@ -6,14 +6,14 @@
 ===================quantumultx================
 [task_local]
 #京东手机狂欢城助力
-10 0,8 * * * https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_carnivalcity_help.js, tag=京东手机狂欢城助力, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
+10 0,8 * * * https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_carnivalcity_help.js, tag=京东手机狂欢城助力, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
 =====================Loon================
 [Script]
-cron "10 0,8 * * *" script-path=https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_carnivalcity_help.js, tag=京东手机狂欢城助力
+cron "10 0,8 * * *" script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_carnivalcity_help.js, tag=京东手机狂欢城助力
 ====================Surge================
-京东手机狂欢城助力 = type=cron,cronexp=10 0,8 * * *,wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_carnivalcity_help.js
+京东手机狂欢城助力 = type=cron,cronexp=10 0,8 * * *,wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_carnivalcity_help.js
 ============小火箭=========
-京东手机狂欢城助力 = type=cron,script-path=https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_carnivalcity_help.js, cronexpr="10 0,8 * * *", timeout=3600, enable=true
+京东手机狂欢城助力 = type=cron,script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_carnivalcity_help.js, cronexpr="10 0,8 * * *", timeout=3600, enable=true
 */
 const $ = new Env('京东手机狂欢城助力');
 const notify = $.isNode() ? require('./sendNotify') : '';
@@ -38,11 +38,11 @@ const JD_API_HOST = 'https://api.m.jd.com/api';
     $.msg($.name, '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/bean/signIndex.action', {"open-url": "https://bean.m.jd.com/bean/signIndex.action"});
     return;
   }
-  $.updatePkActivityIdRes = await getAuthorShareCode('https://raw.githubusercontent.com/linmudaye/updateTeam/master/shareCodes/jd_cityShareCodes.json')
+  $.updatePkActivityIdRes = await getAuthorShareCode('https://raw.githubusercontent.com/Aaron-lv/updateTeam/master/shareCodes/jd_cityShareCodes.json')
   if (!$.updatePkActivityIdRes) {
-    $.http.get({url: 'https://purge.jsdelivr.net/gh/linmudaye/updateTeam@master/shareCodes/jd_cityShareCodes.json'}).then((resp) => {}).catch((e) => $.log('刷新CDN异常', e));
+    $.http.get({url: 'https://purge.jsdelivr.net/gh/Aaron-lv/updateTeam@master/shareCodes/jd_cityShareCodes.json'}).then((resp) => {}).catch((e) => $.log('刷新CDN异常', e));
     await $.wait(1000)
-    $.updatePkActivityIdRes = await getAuthorShareCode('https://cdn.jsdelivr.net/gh/linmudaye/updateTeam@master/shareCodes/jd_cityShareCodes.json')
+    $.updatePkActivityIdRes = await getAuthorShareCode('https://cdn.jsdelivr.net/gh/Aaron-lv/updateTeam@master/shareCodes/jd_cityShareCodes.json')
   }
   for (let i = 0; i < cookiesArr.length; i++) {
     if (cookiesArr[i]) {
