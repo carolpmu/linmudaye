@@ -16,7 +16,7 @@ guaopenwait_All 所有
 guaopenwait49="0"
 All变量适用
 ————————————————
-入口：[ 10.25~11.12 立即入会 瓜分百万京豆 (https://lzdz1-isv.isvjcloud.com/dingzhi/fashion/recruit/activity?activityId=cfc218d9250d445a870b3c18b58b5475&shareUuid=cfc3421596744f9ab50af3df1cd149ec)]
+入口：[ 10.25~11.12 立即入会 瓜分百万京豆 (https://lzdz1-isv.isvjcloud.com/dingzhi/fashion/recruit/activity?activityId=cfc218d9250d445a870b3c18b58b5475&shareUuid=499153b6456043c9a7ce6f27496d6129)]
 请求太频繁会被黑ip
 过10分钟再执行
 ============Quantumultx===============
