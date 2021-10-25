@@ -25,7 +25,7 @@ All变量适用
 47 2 1-12,25-31 10,11 * jd_opencard49.js, tag=10.25~11.12 立即入会 瓜分百万京豆, enabled=true
 */
 let guaopencard_addSku = "false"
-let guaopencard = "false"
+let guaopencard = "true"
 let guaopenwait = "0"
 
 const $ = new Env('10.25~11.12 立即入会 瓜分百万京豆');
