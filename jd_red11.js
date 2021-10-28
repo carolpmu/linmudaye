@@ -1,6 +1,6 @@
 /*
 双十一无门槛红包
-cron 0 0,12 * * * jd_red11.js
+cron 0 0,12,18,20 * * *  jd_red11.js
 * */
 const $ = new Env('双11红包');
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
