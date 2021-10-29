@@ -2,7 +2,7 @@
 抢京豆
 cron 0 0,1 * * * jd_qjd.js
  * */
-const $ = new Env('qjd');
+const $ = new Env('抢京豆');
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 let cookiesArr = [];
 if ($.isNode()) {
