@@ -14,7 +14,7 @@ cron "41 0,12,23 * * *" script-path=jd_price.js,tag=京东保价
 ============小火箭=========
 京东保价 = type=cron,script-path=jd_price.js, cronexpr="41 0,12,23 * * *", timeout=3600, enable=true
  */
-const $ = new Env('京东价保一对一推送版');
+const $ = new Env('京东保价');
 const notify = $.isNode() ? require('./sendNotify') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
