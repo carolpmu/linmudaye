@@ -324,13 +324,10 @@ function safeGet(data) {
 function readShareCode() {
   console.log(`开始`)
   return new Promise(async resolve => {
-    $.get({
-      url: `http://share.turinglabs.net/api/v3/health/query/${randomCount}/`,
-      'timeout': 10000
-    }, (err, resp, data) => {
+    $.get({url: `http://123/health`, timeout: 10000}, (err, resp, data) => {
       try {
         if (err) {
-          console.log(`${JSON.stringify(err)}`)
+          console.log(JSON.stringify(err))
           console.log(`${$.name} health/read API请求失败，请检查网路重试`)
         } else {
           if (data) {
@@ -360,10 +357,10 @@ function shareCodesFormat() {
       const tempIndex = $.index > inviteCodes.length ? (inviteCodes.length - 1) : ($.index - 1);
       $.newShareCodes = inviteCodes[tempIndex].split('@');
     }
-    // const readShareCodeRes = await readShareCode();
-    // if (readShareCodeRes && readShareCodeRes.code === 200) {
-    //   $.newShareCodes = [...new Set([...$.newShareCodes, ...(readShareCodeRes.data || [])])];
-    // }
+    const readShareCodeRes = await readShareCode();
+    if (readShareCodeRes && readShareCodeRes.code === 200) {
+      $.newShareCodes = [...new Set([...$.newShareCodes, ...(readShareCodeRes.data || [])])];
+    }
     console.log(`第${$.index}个京东账号将要助力的好友${JSON.stringify($.newShareCodes)}`)
     resolve();
   })
