@@ -1,6 +1,6 @@
 /**
  惊喜牧场
- cron 23 0-23/3 * * * jd_jxmchz.js
+ cron 23 0-23/3 * * * jd_jxmchz.js 惊喜牧场内部互助
  */
 // prettier-ignore
 !function (t, r) { "object" == typeof exports ? module.exports = exports = r() : "function" == typeof define && define.amd ? define([], r) : t.CryptoJS = r() }(this, function () {
