@@ -91,7 +91,7 @@ function mainInfo() {
             headers: {
                 "Accept-Language": "zh-cn",
                 "Accept-Encoding": "gzip, deflate, br",
-                'Cookie': `${cookie} ${$.newCookie}`,
+                'Cookie': `${$.newCookie} ${cookie}`,
                 "User-Agent": $.UA ,
             }
         }
@@ -164,7 +164,7 @@ async function getCoupons(shareCode){
             headers: {
                 "Accept-Language": "zh-cn",
                 "Accept-Encoding": "gzip, deflate, br",
-                'Cookie': `${cookie} ${$.newCookie}`,
+                'Cookie': `${$.newCookie} ${cookie}`,
                 'user-agent': $.UA
             }
         }
@@ -215,7 +215,7 @@ async function getInfo2() {
             url: $.url1,
             followRedirect:false,
             headers: {
-                'Cookie': `${cookie} ${$.newCookie}`,
+                'Cookie': `${$.newCookie} ${cookie}`,
                 'user-agent': $.UA
             }
         }
