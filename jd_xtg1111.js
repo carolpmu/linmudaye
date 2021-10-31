@@ -1,5 +1,6 @@
 /**
  * name: 京东-双11星推官
+ cron 0 0,12,18 * * * jd_xtg1111.js
  * author: @lof
  */
 const $ = new Env("✨双11星推官");
