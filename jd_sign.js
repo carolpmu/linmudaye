@@ -7,7 +7,6 @@ npm i png-js 或者 npm i png-js -S
 环境变量 JOY_HOST
 修改域名 https://jdjoy.jd.com 可以改成ip https://49.7.27.236
 */
-
 const validator = require('./JDJRValidator.js');
 const Faker=require('./sign_graphics_validate.js') 
 
