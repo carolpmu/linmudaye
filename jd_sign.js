@@ -1,5 +1,5 @@
 /* 
-cron 14 10 * * * jd_sign.js
+cron 14 10,21 * * * jd_sign.js
 只支持nodejs环境
 需要安装依赖 
 npm i png-js 或者 npm i png-js -S
