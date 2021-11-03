@@ -3,22 +3,21 @@
 Last Modified time: 2021-05-19 16:27:18
 活动入口：京东APP首页-领券-锦鲤红包。[活动地址](https://happy.m.jd.com/babelDiy/zjyw/3ugedFa7yA6NhxLN5gw2L3PF9sQC/index.html)
 未实现功能：领3张券功能
-
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 ================QuantumultX==================
 [task_local]
 #京东全民开红包
-1 1,2,23 * * * https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_redPacket.js, tag=京东全民开红包, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jd_redPacket.png, enabled=true
+1 0,10 * * * jd_redPacket.js, tag=京东全民开红包, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jd_redPacket.png, enabled=true
 ===================Loon==============
 [Script]
-cron "1 1,2,23 * * *" script-path=https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_redPacket.js, tag=京东全民开红包
+cron "1 0,10 * * *" script-path=jd_redPacket.js, tag=京东全民开红包
 ===============Surge===============
 [Script]
-京东全民开红包 = type=cron,cronexp="1 1,2,23 * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_redPacket.js
+京东全民开红包 = type=cron,cronexp="1 0,10 * * *",wake-system=1,timeout=3600,script-path=jd_redPacket.js
 ====================================小火箭=============================
-京东全民开红包 = type=cron,script-path=https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_redPacket.js, cronexpr="1 1,2,23 * * *", timeout=3600, enable=true
+京东全民开红包 = type=cron,script-path=jd_redPacket.js, cronexpr="1 0,10 * * *", timeout=3600, enable=true
  */
-const $ = new Env('京东全民开红包');
+const $ = new Env('京东全民开红包内部助力');
 const notify = $.isNode() ? require('./sendNotify') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
@@ -41,12 +40,7 @@ const JD_API_HOST = 'https://api.m.jd.com/api';
     $.msg($.name, '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/bean/signIndex.action', {"open-url": "https://bean.m.jd.com/bean/signIndex.action"});
     return;
   }
-  let res = await getAuthorShareCode('https://raw.githubusercontent.com/linmudaye/updateTeam/master/shareCodes/jd_red.json')
-  if (!res) {
-    $.http.get({url: 'https://purge.jsdelivr.net/gh/linmudaye/updateTeam@master/shareCodes/jd_red.json'}).then((resp) => {}).catch((e) => $.log('刷新CDN异常', e));
-    await $.wait(1000)
-    res = await getAuthorShareCode('https://cdn.jsdelivr.net/gh/linmudaye/updateTeam@master/shareCodes/jd_red.json')
-  }
+  let res = await getAuthorShareCode('')
   $.authorMyShareIds = [...(res || [])];
   for (let i = 0; i < cookiesArr.length; i++) {
     if (cookiesArr[i]) {
@@ -77,14 +71,14 @@ const JD_API_HOST = 'https://api.m.jd.com/api';
     $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1]);
     $.canHelp = true;
     $.redPacketId = [...new Set($.redPacketId)];
-    if (!isLoginInfo[$.UserName]) continue    
+    if (!isLoginInfo[$.UserName]) continue
     if (cookiesArr && cookiesArr.length >= 2) {
       console.log(`\n\n自己账号内部互助`);
       for (let j = 0; j < $.redPacketId.length && $.canHelp; j++) {
         console.log(`账号 ${$.index} ${$.UserName} 开始给 ${$.redPacketId[j]} 进行助力`)
         $.max = false;
         await jinli_h5assist($.redPacketId[j]);
-        await $.wait(2000)
+        await $.wait(15000)
         if ($.max) {
           $.redPacketId.splice(j, 1)
           j--
@@ -98,7 +92,7 @@ const JD_API_HOST = 'https://api.m.jd.com/api';
         console.log(`\n账号 ${$.index} ${$.UserName} 开始给作者 ${$.authorMyShareIds[j]} 进行助力`)
         $.max = false;
         await jinli_h5assist($.authorMyShareIds[j]);
-        await $.wait(2000)
+        await $.wait(15000)
         if ($.max) {
           $.authorMyShareIds.splice(j, 1)
           j--
@@ -117,9 +111,9 @@ const JD_API_HOST = 'https://api.m.jd.com/api';
 
 async function redPacket() {
   try {
-    await doLuckDrawFun();//券后9.9抽奖
-    await taskHomePage();//查询任务列表
-    await doTask();//领取任务，做任务，领取红包奖励
+    //await doLuckDrawFun();//券后9.9抽奖
+    //await taskHomePage();//查询任务列表
+    //await doTask();//领取任务，做任务，领取红包奖励
     await h5activityIndex();//查询红包基础信息
     await red();//红包任务(发起助力红包,领取助力红包等)
     await h5activityIndex();
@@ -262,7 +256,7 @@ async function red() {
     if ($.waitOpenTimes > 0) {
       for (let i = 0; i < $.waitOpenTimes; i++) {
         await h5receiveRedpacketAll();
-        await $.wait(500);
+        await $.wait(2000);
       }
     }
   } else if ($.h5activityIndex && $.h5activityIndex.data && $.h5activityIndex.data.biz_code === 20002) {
