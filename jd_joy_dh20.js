@@ -1,5 +1,5 @@
 /*
-宠汪汪积分兑换奖品脚本, 目前脚本只兑换京豆，兑换京豆成功，才会发出通知提示，其他情况不通知。
+退而求其次兑换20脚本, 目前脚本只兑换京豆，兑换京豆成功，才会发出通知提示，其他情况不通知。
 活动入口：京东APP我的-更多工具-宠汪汪
 兑换规则：一个账号一天只能兑换一次京豆。
 兑换奖品成功后才会有系统弹窗通知
@@ -7,22 +7,22 @@
 脚本兼容: Quantumult X, Surge, Loon, JSBox, Node.js
 ==============Quantumult X==============
 [task_local]
-#宠汪汪积分兑换奖品
-59 7,15,23 * * * https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_joy_dh500.js, tag=宠汪汪积分兑换奖品, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jdcww.png, enabled=true
+#退而求其次兑换20
+59 15 * * * https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_joy_dh20.js, tag=退而求其次兑换20, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jdcww.png, enabled=true
 ==============Loon==============
 [Script]
-cron "59 7,15,23 * * *" script-path=https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_joy_dh500.js,tag=宠汪汪积分兑换奖品
+cron "59 15 * * *" script-path=https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_joy_dh20.js,tag=退而求其次兑换20
 ================Surge===============
-宠汪汪积分兑换奖品 = type=cron,cronexp="59 7,15,23 * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_joy_dh500.js
+退而求其次兑换20 = type=cron,cronexp="59 15 * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_joy_dh20.js
 ===============小火箭==========
-宠汪汪积分兑换奖品 = type=cron,script-path=https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_joy_dh500.js, cronexpr="59 7,15,23 * * *", timeout=3600, enable=true
+退而求其次兑换20 = type=cron,script-path=https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_joy_dh20.js, cronexpr="59 15 * * *", timeout=3600, enable=true
  */
-const $ = new Env('宠汪汪兑换500');
+const $ = new Env('退而求其次兑换20');
 const zooFaker = require('./JDJRValidator_Pure');
 // $.get = zooFaker.injectToRequest2($.get.bind($));
 // $.post = zooFaker.injectToRequest2($.post.bind($));
 let allMessage = '';
-let joyRewardName = 0;//是否兑换京豆，默认0不兑换京豆，其中20为兑换20京豆,500为兑换500京豆，0为不兑换京豆.数量有限先到先得
+let joyRewardName = 20;//是否兑换京豆，默认0不兑换京豆，其中20为兑换20京豆,500为兑换500京豆，0为不兑换京豆.数量有限先到先得
 //Node.js用户请在jdCookie.js处填写京东ck;
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 const notify = $.isNode() ? require('./sendNotify') : '';
@@ -54,7 +54,7 @@ Date.prototype.Format = function (fmt) { //author: meizz
 }
 !(async () => {
   if (!cookiesArr[0]) {
-    $.msg('【京东账号一】宠汪汪积分兑换奖品失败', '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/bean/signIndex.action', {"open-url": "https://bean.m.jd.com/bean/signIndex.action"});
+    $.msg('【京东账号一】退而求其次兑换20失败', '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/bean/signIndex.action', {"open-url": "https://bean.m.jd.com/bean/signIndex.action"});
   }
   for (let i = 0; i < cookiesArr.length; i++) {
     if (cookiesArr[i]) {
@@ -136,8 +136,8 @@ async function joyReward() {
         const data = $.getExchangeRewardsRes.data;
         let saleInfoId = '', giftValue = '', extInfo = '', leftStock = 0, salePrice = 0;
         let rewardNum = 0;
-        if ($.isNode() && process.env.JD_JOY_REWARD_NAME) {
-          rewardNum = process.env.JD_JOY_REWARD_NAME * 1;
+        if ($.isNode() && process.env.JD_JOY_REWARD20_NAME) {
+          rewardNum = process.env.JD_JOY_REWARD20_NAME * 1;
         } else if ($.getdata('joyRewardName')) {
           if ($.getdata('joyRewardName') * 1 === 1) {
             //兼容之前的BoxJs设置
@@ -213,7 +213,7 @@ async function joyReward() {
             break
           }
         } else {
-          console.log(`\n您设置了不兑换京豆,如需兑换京豆，请去BoxJs处设置或修改joyRewardName代码或设置环境变量 JD_JOY_REWARD_NAME`)
+          console.log(`\n您设置了不兑换京豆,如需兑换京豆，请去BoxJs处设置或修改joyRewardName代码或设置环境变量 JD_JOY_REWARD20_NAME`)
         }
       } else {
         console.log(`${$.name}getExchangeRewards异常,${JSON.stringify($.getExchangeRewardsRes)}`)
@@ -226,9 +226,9 @@ async function joyReward() {
 function getExchangeRewards() {
   return new Promise(resolve => {
     let lkt = new Date().getTime()
-    let lks = $.md5('' + 'JL1VTNRadM68cIMQ' + lkt).toString()
+    let lks = $.md5('' + 'q8DNJdpcfRQ69gIx' + lkt).toString()
     const option = {
-      url: `https://jdjoy.jd.com/common/gift/getBeanConfigs?reqSource=h5&invokeKey=JL1VTNRadM68cIMQ` + $.validate,
+      url: `https://jdjoy.jd.com/common/gift/getBeanConfigs?reqSource=h5&invokeKey=q8DNJdpcfRQ69gIx` + $.validate,
       headers: {
         "Host": "jdjoy.jd.com",
         "Accept": "*/*",
@@ -265,9 +265,9 @@ function exchange(saleInfoId, orderSource) {
   let body = {"buyParam":{"orderSource":orderSource,"saleInfoId":saleInfoId},"deviceInfo":{}}
   return new Promise(resolve => {
     let lkt = new Date().getTime()
-    let lks = $.md5('' + 'JL1VTNRadM68cIMQ' + lkt).toString()
+    let lks = $.md5('' + 'q8DNJdpcfRQ69gIx' + lkt).toString()
     const option = {
-      url: `https://jdjoy.jd.com/common/gift/new/exchange?reqSource=h5&invokeKey=JL1VTNRadM68cIMQ` + $.validate,
+      url: `https://jdjoy.jd.com/common/gift/new/exchange?reqSource=h5&invokeKey=q8DNJdpcfRQ69gIx` + $.validate,
       body: JSON.stringify(body),
       headers: {
         "Host": "jdjoy.jd.com",
