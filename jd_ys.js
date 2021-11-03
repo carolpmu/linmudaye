@@ -24,6 +24,7 @@ let jdNotify = true;//是否关闭通知，false打开通知推送，true关闭�
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '', message;
 let joinIdInfo = {}, AuthorizationInfo = {};
+let num;
 $.shareCodes = [];
 if ($.isNode()) {
   Object.keys(jdCookieNode).forEach((item) => {
@@ -61,6 +62,7 @@ let allMessage = '';
         }
         continue
       }
+      num = 0
       await jdYs()
       joinIdInfo[$.UserName] = $.joinId
       AuthorizationInfo[$.UserName] = $.Authorization
@@ -280,7 +282,7 @@ function active(shareId = null, type = true) {
                 } else {
                   console.log(`\n抽奖次数：${num}，开始抽奖`)
                 }
-               $.stop = false
+                $.stop = false
                 for (let i = 0; i < num && !$.stop; i++) {
                   await lottery()
                   await $.wait(2000)
@@ -338,6 +340,8 @@ function lottery() {
                 num = 0
               } else {
                 console.log(`抽奖成功：获得空气~`)
+                num++
+                if (num === 5) $.stop = true
               }
             } else {
               console.log(`抽奖失败：${data.msg}`)
