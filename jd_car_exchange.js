@@ -5,7 +5,10 @@
  已支持IOS, Node.js支持N个京东账号
  脚本兼容: Node.js
  修复兑换api，Fix time:2021-09-06 22:02
-cron 0 0 0 * * * jd_car_exchange.js
+[task_local]
+#京东汽车兑换
+0 0 * * * jd_car_exchange.js, tag=京东汽车兑换, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
+## 京东汽车兑换
  */
 const $ = new Env('京东汽车兑换');
 //Node.js用户请在jdCookie.js处填写京东ck;
