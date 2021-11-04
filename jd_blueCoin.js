@@ -9,14 +9,11 @@
 [task_local]
 #东东超市兑换奖品
 59 23 * * * https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_blueCoin.js, tag=东东超市兑换奖品, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jxc.png, enabled=true
-
 ====================Loon=================
 [Script]
 cron "59 23 * * *" script-path=https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_blueCoin.js,tag=东东超市兑换奖品
-
 ===================Surge==================
 东东超市兑换奖品 = type=cron,cronexp="59 23 * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_blueCoin.js
-
 ============小火箭=========
 东东超市兑换奖品 = type=cron,script-path=https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_blueCoin.js, cronexpr="59 23 * * *", timeout=3600, enable=true
  */
@@ -25,7 +22,7 @@ const notify = $.isNode() ? require('./sendNotify') : '';
 let allMessage = '';
 //Node.js用户请在jdCookie.js处填写京东ck;
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
-let coinToBeans = $.getdata('coinToBeans') || '超值京豆包'; //兑换多少数量的京豆（20或者1000），0表示不兑换，默认不兑换京豆，如需兑换把0改成20或者1000，或者'商品名称'(商品名称放到单引号内)即可
+let coinToBeans = $.getdata('coinToBeans') || 0; //兑换多少数量的京豆（20或者1000），0表示不兑换，默认不兑换京豆，如需兑换把0改成20或者1000，或者'商品名称'(商品名称放到单引号内)即可
 let jdNotify = false;//是否开启静默运行，默认false关闭(即:奖品兑换成功后会发出通知提示)
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '';
@@ -254,7 +251,7 @@ function smtg_materialPrizeIndex(timeout = 0) {
         try {
           if (safeGet(data)) {
             data = JSON.parse(data);
-            if (data.data.bizCode && data.data.bizCode !== 0) {
+            if (data.data.bizCode !== 0) {
               $.beanerr = `${data.data.bizMsg}`;
               return
             }
@@ -292,12 +289,12 @@ function smtg_queryPrize(timeout = 0){
           if (safeGet(data)) {
             data = JSON.parse(data);
             // $.queryPrizeData = data;
-            if (data.data.bizCode && data.data.bizCode !== 0) {
+            if (data.data.bizCode !== 0) {
               console.log(`${data.data.bizMsg}\n`)
               $.beanerr = `${data.data.bizMsg}`;
               return
             }
-            if (data.data.bizCode && data.data.bizCode === 0) {
+            if (data.data.bizCode === 0) {
               const { areas } = data.data.result;
               const prizes = areas.filter(vo => vo['type'] === 4);
               if (prizes && prizes[0]) {
@@ -357,17 +354,17 @@ function smtg_obtainPrize(prizeId, timeout = 0, functionId = 'smt_exchangePrize'
           if (safeGet(data)) {
             data = JSON.parse(data);
             $.data = data;
-            if ($.data.data.bizCode && ($.data.data.bizCode !== 0 && $.data.data.bizCode !== 400)) {
+            if ($.data.data.bizCode !== 0 && $.data.data.bizCode !== 400) {
               $.beanerr = `${$.data.data.bizMsg}`;
               //console.log(`【京东账号${$.index}】${$.nickName} 换取京豆失败：${$.data.data.bizMsg}`)
               return
             }
-            if ($.data.data.bizCode && $.data.data.bizCode === 400) {
+            if ($.data.data.bizCode === 400) {
               $.errBizCodeCount ++;
               console.log(`debug 兑换京豆活动火爆次数:${$.errBizCodeCount}`);
               return
             }
-            if ($.data.data.bizCode && $.data.data.bizCode === 0) {
+            if ($.data.data.bizCode === 0) {
               if (`${coinToBeans}` === '1000') {
                 $.beanscount ++;
                 console.log(`【京东账号${$.index}】${$.nickName || $.UserName} 第${$.data.data.result.count}次换${$.title}成功`)
@@ -404,7 +401,7 @@ function smtgHome() {
           if (safeGet(data)) {
             data = JSON.parse(data);
             // console.log(data)
-            if (data.data.bizCode && data.data.bizCode === 0) {
+            if (data.data.bizCode === 0) {
               const { result } = data.data;
               $.totalBlue = result.totalBlue;
               console.log(`【总蓝币】${$.totalBlue}个\n`);
