@@ -5,7 +5,7 @@ cron 0 0,12 * * * jd_red11.js
 const $ = new Env('双11红包');
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 const notify = $.isNode() ? require('./sendNotify') : '';
-const flCode = $.isNode() ? (process.env.FLCODE ? process.env.FLCODE : 'yK2GZ71'):'yK2GZ71';
+const flCode = $.isNode() ? (process.env.FLCODE ? process.env.FLCODE : 'ywHEQzp'):'ywHEQzp';
 let cookiesArr = [];
 if ($.isNode()) {
     Object.keys(jdCookieNode).forEach((item) => {
