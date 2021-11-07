@@ -106,7 +106,7 @@ async function signInit() {
     $.get(taskUrl('speedSignInit', {
       "activityId": "8a8fabf3cccb417f8e691b6774938bc2",
       "kernelPlatform": "RN",
-      "inviterId":""
+      "inviterId":"U44jAghdpW58FKgfqPdotA=="
     }), async (err, resp, data) => {
       try {
         if (err) {
@@ -664,6 +664,9 @@ function taskGetUrl(function_id, body) {
 function invite2() {
   let t = +new Date()
   let inviterIdArr = [
+    "a99FNTpjt1jCNsakdDrRSw==",
+    "hMMt5NIfs6lalG+VJ58n4kh7UrnluQPP69sxjzeFbZc=",
+    "pgQHO5TcujeOE8QRCqtQbE+J5hsKTce5NnXQ3Qpmzvg=",
   ]
   let inviterId = inviterIdArr[Math.floor((Math.random() * inviterIdArr.length))]
   let options = {
@@ -689,7 +692,9 @@ function invite2() {
 function invite() {
   let t = +new Date()
   let inviterIdArr = [
-    ""
+    "a99FNTpjt1jCNsakdDrRSw==",
+    "hMMt5NIfs6lalG+VJ58n4kh7UrnluQPP69sxjzeFbZc=",
+    "pgQHO5TcujeOE8QRCqtQbE+J5hsKTce5NnXQ3Qpmzvg=",
   ]
   let inviterId = inviterIdArr[Math.floor((Math.random() * inviterIdArr.length))]
   let options = {
