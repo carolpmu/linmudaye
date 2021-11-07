@@ -106,7 +106,7 @@ async function signInit() {
     $.get(taskUrl('speedSignInit', {
       "activityId": "8a8fabf3cccb417f8e691b6774938bc2",
       "kernelPlatform": "RN",
-      "inviterId":"U44jAghdpW58FKgfqPdotA=="
+      "inviterId":"a99FNTpjt1jCNsakdDrRSw=="
     }), async (err, resp, data) => {
       try {
         if (err) {
