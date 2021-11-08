@@ -80,11 +80,11 @@ if ($.isNode()) {
       await $.wait(2000);
     }
   }
-  let res = await getAuthorShareCode('')
+  let res = await getAuthorShareCode('https://raw.githubusercontent.com/linmudaye/updateTeam/master/shareCodes/cfd.json')
   if (!res) {
-    $.http.get({url: ''}).then((resp) => {}).catch((e) => console.log('刷新CDN异常', e));
+    $.http.get({url: 'https://purge.jsdelivr.net/gh/linmudaye/updateTeam@master/shareCodes/cfd.json'}).then((resp) => {}).catch((e) => console.log('刷新CDN异常', e));
     await $.wait(1000)
-    res = await getAuthorShareCode('')
+    res = await getAuthorShareCode('https://cdn.jsdelivr.net/gh/linmudaye/updateTeam@master/shareCodes/cfd.json')
   }
   $.strMyShareIds = [...(res && res.shareId || [])]
   await shareCodesFormat()
@@ -300,9 +300,17 @@ function GetPropCardCenterInfo() {
                   break;
                 }
               }
-              if (!$.canuse) console.log(`无可用道具卡\n`)
+              for (let key of Object.keys(data.cardInfo.richcard)) {
+                let vo = data.cardInfo.richcard[key]
+                if (vo.dwCardNums > 0) {
+                  $.canuse = true;
+                  await UsePropCard(vo.strCardTypeIndex)
+                  break;
+                }
+              }
+              if (!$.canuse) console.log(`无可用道具卡`)
             } else {
-              console.log(`有在使用中的道具卡，跳过使用\n`)
+              console.log(`有在使用中的道具卡，跳过使用`)
             }
           }
         }
@@ -326,9 +334,9 @@ function UsePropCard(strCardTypeIndex) {
           data = JSON.parse(data.replace(/\n/g, "").match(new RegExp(/jsonpCBK.?\((.*);*\)/))[1]);
           if (data.iRet === 0) {
             let cardName = strCardTypeIndex.split("_")[1];
-            console.log(`使用道具卡【${cardName}】成功\n`)
+            console.log(`使用道具卡【${cardName}】成功`)
           } else {
-            console.log(`使用道具卡失败：${JSON.stringify(data)}\n`)
+            console.log(`使用道具卡失败：${JSON.stringify(data)}`)
           }
         }
       } catch (e) {
@@ -616,7 +624,7 @@ async function getTakeAggrPage(type) {
               console.log(`${$.name} GetTakeAggrPage API请求失败，请检查网路重试`)
             } else {
               data = JSON.parse(data.replace(/\n/g, "").match(new RegExp(/jsonpCBK.?\((.*);*\)/))[1]);
-              console.log(`领助力奖励`)
+              console.log(`\n领助力奖励`)
               let helpNum = []
               for (let key of Object.keys(data.Data.Employee.EmployeeList)) {
                 let vo = data.Data.Employee.EmployeeList[key]
