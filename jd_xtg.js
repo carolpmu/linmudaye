@@ -1,7 +1,19 @@
-/**
- 星推官
- cron 22 3,4 * * * jd_xtg.js
- * */
+/*
+星推官
+已支持IOS双京东账号, Node.js支持N个京东账号
+脚本兼容: QuantumultX, Surge, Loon, 小火箭，JSBox, Node.js
+============Quantumultx===============
+[task_local]
+#星推官
+22 3,4 * * * https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_xtg.js, tag=星推官, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
+================Loon==============
+[Script]
+cron "22 3,4 * * *" script-path=https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_xtg.js tag=星推官
+===============Surge=================
+星推官 = type=cron,cronexp="22 3,4 * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_xtg.js
+============小火箭=========
+星推官 = type=cron,script-path=https://raw.githubusercontent.com/linmudaye/linmudaye/main/jd_xtg.js, cronexpr="22 3,4 * * *", timeout=3600, enable=true
+ */
 const $ = new Env('星推官');
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 const notify = $.isNode() ? require('./sendNotify') : '';
@@ -131,7 +143,7 @@ async function main(cookie,index) {
                 continue;
             }
             console.log(`${userName},任务：${oneTask.taskName},去执行`);
-            if(oneTask.type === 'JOIN_SHOPPING_CART'){
+            if(oneTask.type === 'JOIN_SHOPPING_CART' && ["card","car"].includes(process.env.FS_LEVEL)){
                 let getReward = await takeRequest(cookie,`{"parentId":"${oneTask.parentId}","taskId":"${oneTask.taskId}","apiMapping":"/api/task/getReward"}`);
                 console.log(`${userName},执行结果：${JSON.stringify(getReward)}`);
                 await $.wait(2000);
