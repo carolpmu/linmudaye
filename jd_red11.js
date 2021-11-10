@@ -1,11 +1,11 @@
 /*
 双十一无门槛红包
-cron 0 0,12 * * * jd_red11.js
+cron 0 10,12,20 * * * jd_red11.js
 * */
 const $ = new Env('双11红包');
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 const notify = $.isNode() ? require('./sendNotify') : '';
-const flCode = $.isNode() ? (process.env.FLCODE ? process.env.FLCODE : 'ywHEQzp'):'ywHEQzp';
+const flCode = $.isNode() ? (process.env.FLCODE ? process.env.FLCODE : 'yChz6Nt'):'yChz6Nt';
 let cookiesArr = [];
 if ($.isNode()) {
     Object.keys(jdCookieNode).forEach((item) => {
