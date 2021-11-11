@@ -1,22 +1,10 @@
 /*
-脚本：取关京东店铺和商品
-更新时间：2021-05-08
-因种豆得豆和宠汪汪以及NobyDa大佬的京东签到脚本会关注店铺和商品，故此脚本用来取消已关注的店铺和商品
-默认：每运行一次脚本全部已关注的店铺与商品
-建议此脚本运行时间在 种豆得豆和宠汪汪脚本运行之后 再执行
-现有功能: 1、取关商品。2、取关店铺。3、匹配到boxjs输入的过滤关键词后，不再进行此商品/店铺后面(包含输入的关键词商品/店铺)的取关
-脚本兼容: Quantumult X, Surge, Loon, JSBox, Node.js, 小火箭
-==============Quantumult X===========
-[task_local]
-#取关京东店铺商品
-55 23 * * * jd_unsubscribe.js, tag=取关京东店铺商品, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
-===========Loon============
-[Script]
-cron "55 23 * * *" script-path=jd_unsubscribe.js,tag=取关京东店铺商品
-============Surge=============
-取关京东店铺商品 = type=cron,cronexp="55 23 * * *",wake-system=1,timeout=3600,script-path=jd_unsubscribe.js
-===========小火箭========
-取关京东店铺商品 = type=cron,script-path=jd_unsubscribe.js, cronexpr="55 23 * * *", timeout=3600, enable=true
+ * @Author: X1a0He
+ * @Date: 2021-09-04 11:50:47
+ * @LastEditTime: 2021-11-10 22:30:00
+ * @LastEditors: X1a0He
+ * @Description: 批量取关京东店铺和商品
+ * @Fixed: 不再支持Qx，仅支持Node.js
  */
 const $ = new Env('批量取关店铺和商品');
 //Node.js用户请在jdCookie.js处填写京东ck;
@@ -68,7 +56,16 @@ let args_xh = {
      * 可用环境变量控制：JD_UNSUB_INTERVAL，默认为3000毫秒
      * */
     unSubscribeInterval: process.env.JD_UNSUB_INTERVAL * 1 || 1000,
-    printLog: process.env.JD_UNSUB_PLOG || true
+    /*
+     * 是否打印日志
+     * 可用环境变量控制：JD_UNSUB_PLOG，默认为true
+     * */
+    printLog: process.env.JD_UNSUB_PLOG || true,
+    /*
+     * 失败次数，当取关商品或店铺时，如果连续 x 次失败，则结束本次取关，防止死循环
+     * 可用环境变量控制：JD_UNSUB_FAILTIMES，默认为3次
+     * */
+    failTimes: process.env.JD_UNSUB_FAILTIMES || 3
 }
 !(async() => {
     console.log('X1a0He留：运行前请看好脚本内的注释，日志已经很清楚了，有问题带着日志来问')
@@ -106,6 +103,7 @@ let args_xh = {
                 $.commIdList = ``;
                 $.shopIdList = ``;
                 $.endGoods = $.endShops = false;
+                $.failTimes = 0;
                 console.log(`=====京东账号${$.index} ${$.nickName || $.UserName}内部变量=====`)
                 console.log(`$.unsubscribeGoodsNum: ${$.unsubscribeGoodsNum}`)
                 console.log(`$.unsubscribeShopsNum: ${$.unsubscribeShopsNum}`)
@@ -113,6 +111,7 @@ let args_xh = {
                 console.log(`$.shopsTotalNum: ${$.shopsTotalNum}`)
                 console.log(`$.commIdList: ${$.commIdList}`)
                 console.log(`$.shopIdList: ${$.shopIdList}`)
+                console.log(`$.failTimes: ${$.failTimes}`)
                 console.log(`================`)
                 await favCommQueryFilter(); //获取商品并过滤
                 await $.wait(1000)
@@ -148,6 +147,9 @@ let args_xh = {
                             }
                         }
                     }
+                    if($.failTimes >= args_xh.failTimes){
+                        console.log('失败次数到达设定值，触发防死循环机制，该帐号已跳过');
+                    }
                 } while(true)
                 await showMsg_xh();
             }
@@ -173,6 +175,7 @@ function requireConfig(){
             console.log(`shopKeyWords: ${typeof args_xh.shopKeyWords}, ${args_xh.shopKeyWords}`)
             console.log(`unSubscribeInterval: ${typeof args_xh.unSubscribeInterval}, ${args_xh.unSubscribeInterval}`)
             console.log(`printLog: ${typeof args_xh.printLog}, ${args_xh.printLog}`)
+            console.log(`failTimes: ${typeof args_xh.failTimes}, ${args_xh.failTimes}`)
             console.log('=======================')
         }
         resolve()
@@ -251,7 +254,12 @@ function favCommBatchDel(){
         $.get(option, (err, resp, data) => {
             try{
                 data = JSON.parse(data);
-                data.iRet === "0" && data.errMsg === "success" ? console.log(`成功取消收藏商品：${$.unsubscribeGoodsNum}个\n`) : console.log(`批量取消收藏商品失败\n`, data)
+                if(data.iRet === "0" && data.errMsg === "success"){
+                    console.log(`成功取消收藏商品：${$.unsubscribeGoodsNum}个\n`)
+                    $.failTimes = 0;
+                } else {
+                    console.log(`批量取消收藏商品失败，失败次数：${++$.failTimes}\n`, data)
+                }
             } catch(e){
                 $.logErr(e, resp);
             } finally{
@@ -320,7 +328,12 @@ function batchunfollow(){
         $.get(option, (err, resp, data) => {
             try{
                 data = JSON.parse(data);
-                data.iRet === "0" ? console.log(`已成功取消关注店铺：${$.unsubscribeShopsNum}个\n`) : console.log(`批量取消关注店铺失败\n`)
+                if(data.iRet === "0"){
+                    console.log(`已成功取消关注店铺：${$.unsubscribeShopsNum}个\n`)
+                    $.failTimes = 0;
+                } else {
+                    console.log(`批量取消关注店铺失败，失败次数：${++$.failTimes}\n`)
+                }
             } catch(e){
                 $.logErr(e, resp);
             } finally{
